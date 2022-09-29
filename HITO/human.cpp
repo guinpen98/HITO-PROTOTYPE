@@ -7,7 +7,7 @@ void Human::draw()const {
 	dotaimae.getTexture().drawAt(dotaimae.getX(), dotaimae.getY());
 	kao.getTexture().rotatedAt(Vec2{ kao.getTexture().size().x / 2, kao.getTexture().size().y / 2 + 130}, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(kao.getX(), kao.getY());
 	Texture kuchi_texture;
-	switch ((int)Scene::Time() % 4)
+	switch (int(Scene::Time() * 6) % 4)
 	{
 	case 0:
 		kuchi_texture = kuchi.getTexture();

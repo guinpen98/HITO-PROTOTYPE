@@ -1,8 +1,14 @@
 ﻿# include <Siv3D.hpp> // OpenSiv3D v0.6.5
 #include "human.h"
+#include <windows.h>
+
 
 void Main()
 {
+	wchar_t exe[] = L"C:\\Users\\yuri_\\Downloads\\stn019363\\softalk\\SofTalk.exe";
+	wchar_t param[] = L"/X:1 /W:こんにちは";
+	ShellExecute(0, 0, exe, param, L"", SW_SHOW);
+
 	Window::Resize(512, 512);
 
 	// 背景の色を設定 | Set background color
@@ -18,33 +24,29 @@ void Main()
 	font.addFallback(emojiFont);
 
 	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
-	const Texture human_t{ U"img/human/zenshin.png" };
+	//const Texture human_t{ U"img/human/zenshin.png" };
 
 	Human human;
 
+	float time = 0;
+
 	while (System::Update())
 	{
+		time += Scene::DeltaTime();
+		if (int(time) == 10) {
+			ShellExecute(0, 0, exe, param, L"", SW_SHOW);
+			time = 0;
+		}
+
 		// テクスチャを描く | Draw a texture
-		human_t.draw(0, 0, ColorF(1.0, 0.5));
+		//human_t.draw(0, 0, ColorF(1.0, 0.5));
 		human.draw();
 
 		// テキストを画面の中心に描く | Put a text in the middle of the screen
-		font(U"Hello, Siv3D!🚀").drawAt(Scene::Center(), Palette::Black);
+		//font(U"Hello, Siv3D!🚀").drawAt(Scene::Center(), Palette::Black);
 
 		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
 		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });
-
-		// もし [A] キーが押されたら | When [A] key is down
-		if (KeyA.down())
-		{
-			// 選択肢からランダムに選ばれたメッセージをデバッグ表示 | Print a randomly selected text
-			Print << Sample({ U"Hello!", U"こんにちは", U"你好", U"안녕하세요?" });
-		}
-
-		// もし [Button] が押されたら | When [Button] is pushed
-		if (SimpleGUI::Button(U"Button", Vec2{ 200, 40 }))
-		{
-		}
 	}
 }
 

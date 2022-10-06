@@ -28,7 +28,7 @@ void Main()
 	Human human;
 	Draw draw;
 
-	float time = 0;
+	double time = 0;
 
 	while (System::Update())
 	{

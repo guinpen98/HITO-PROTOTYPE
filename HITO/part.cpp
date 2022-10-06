@@ -11,9 +11,6 @@ int Part::getY() const
 {
 	return y;
 }
-Texture Part::getTexture()const {
-	return texture;
-}
 
 void Part::setAngle(const float new_angle)
 {

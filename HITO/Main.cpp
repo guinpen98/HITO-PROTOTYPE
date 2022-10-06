@@ -1,5 +1,6 @@
 ﻿# include <Siv3D.hpp> // OpenSiv3D v0.6.5
 #include "human.h"
+#include "draw.h"
 #include <windows.h>
 
 
@@ -24,9 +25,8 @@ void Main()
 	font.addFallback(emojiFont);
 
 	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
-	//const Texture human_t{ U"img/human/zenshin.png" };
-
 	Human human;
+	Draw draw;
 
 	float time = 0;
 
@@ -39,8 +39,8 @@ void Main()
 		}
 
 		// テクスチャを描く | Draw a texture
-		//human_t.draw(0, 0, ColorF(1.0, 0.5));
-		human.draw();
+		//human.draw();
+		draw.characterDraw(human);
 
 		// テキストを画面の中心に描く | Put a text in the middle of the screen
 		//font(U"Hello, Siv3D!🚀").drawAt(Scene::Center(), Palette::Black);

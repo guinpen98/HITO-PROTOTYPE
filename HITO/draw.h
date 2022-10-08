@@ -10,7 +10,7 @@ private:
 	std::array<std::unique_ptr<Texture>, 14> textures;
 public:
 	Draw() {
-		textures[0].reset(new Texture(U"img/human/kuchi.png"));
+		textures[0].reset(new Texture(U"img/human/kuchi1.png"));
 		textures[1].reset(new Texture(U"img/human/kuchi2.png"));
 		textures[2].reset(new Texture(U"img/human/kuchi3.png"));
 		textures[3].reset(new Texture(U"img/human/me1.png"));

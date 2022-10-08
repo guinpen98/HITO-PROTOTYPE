@@ -794,5 +794,8 @@
     <ClInclude Include="draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="configure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

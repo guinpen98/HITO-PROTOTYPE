@@ -3,6 +3,19 @@
 #include "draw.h"
 #include <windows.h>
 
+#include <string>
+
+std::wstring stringToWstring(const String siv_str) {
+	std::wstring wstr;
+	for (int i = 0; i < (int)siv_str.size(); ++i) {
+		wstr.push_back(wchar_t(siv_str[i]));
+	}
+	return wstr;
+}
+bool isEnter(const String siv_str) {
+	if (siv_str.size() == 0) return false;
+	return char32_t(siv_str.back()) == U'\n';
+}
 
 void Main()
 {
@@ -10,13 +23,16 @@ void Main()
 	wchar_t param[] = L"/X:1 /W:こんにちは";
 	ShellExecute(0, 0, exe, param, L"", SW_SHOW);
 
-	Window::Resize(512, 512);
+	Window::Resize(window_w, window_h);
 
 	// 背景の色を設定 | Set background color
 	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 
-	// 通常のフォントを作成 | Create a new font
-	const Font font{ 60 };
+	const Font font{ 40 };
+
+	String text;
+
+	constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
 
 	// 絵文字用フォントを作成 | Create a new emoji font
 	const Font emojiFont{ 60, Typeface::ColorEmoji };
@@ -30,20 +46,39 @@ void Main()
 
 	double time = 0;
 
+	const std::wstring default_cmd = L"/X:1 /W:";
+
+	// 文字列を受け取った後
+	std::wstring message_cmd;
+
+	String editingText;
+	
+
 	while (System::Update())
 	{
-		time += Scene::DeltaTime();
+		/*time += Scene::DeltaTime();
 		if (int(time) == 10) {
 			ShellExecute(0, 0, exe, param, L"", SW_SHOW);
 			time = 0;
-		}
+		}*/
 
 		// テクスチャを描く | Draw a texture
-		//human.draw();
 		draw.characterDraw(human);
 
-		// テキストを画面の中心に描く | Put a text in the middle of the screen
-		//font(U"Hello, Siv3D!🚀").drawAt(Scene::Center(), Palette::Black);
+		// キーボードからテキストを入力
+		TextInput::UpdateText(text);
+		if (isEnter(text)) {
+			message_cmd = default_cmd + stringToWstring(text);
+			ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
+			text = U"";
+		}
+
+		// 未変換の文字入力を取得
+		editingText = TextInput::GetEditingText();
+
+		area.draw(ColorF{ 0.3 });
+
+		font(text + U'|' + editingText).draw(area.stretched(-20));
 
 		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
 		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });

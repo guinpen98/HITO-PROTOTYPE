@@ -1,11 +1,11 @@
-﻿# include <Siv3D.hpp> // OpenSiv3D v0.6.5
+﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.5
 #include "human.h"
 #include "draw.h"
 #include <windows.h>
-
+#include <fstream>
 #include <string>
 
-std::wstring stringToWstring(const String siv_str) {
+std::wstring sivStringToWstring(const String siv_str) {
 	std::wstring wstr;
 	for (int i = 0; i < (int)siv_str.size(); ++i) {
 		wstr.push_back(wchar_t(siv_str[i]));
@@ -15,6 +15,14 @@ std::wstring stringToWstring(const String siv_str) {
 bool isEnter(const String siv_str) {
 	if (siv_str.size() == 0) return false;
 	return char32_t(siv_str.back()) == U'\n';
+}
+std::string wstringToString(const std::wstring wstr) {
+	size_t i;
+	char* buffer = new char[wstr.size() * MB_CUR_MAX + 1];
+	wcstombs_s(&i, buffer, wstr.size() * MB_CUR_MAX + 1, wstr.c_str(), _TRUNCATE);
+	std::string result = buffer;
+	delete[] buffer;
+	return result;
 }
 
 void Main()
@@ -35,24 +43,26 @@ void Main()
 	constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
 
 	// 絵文字用フォントを作成 | Create a new emoji font
-	const Font emojiFont{ 60, Typeface::ColorEmoji };
+	const Font emoji_font{ 60, Typeface::ColorEmoji };
 
 	// `font` が絵文字用フォントも使えるようにする | Set emojiFont as a fallback
-	font.addFallback(emojiFont);
+	font.addFallback(emoji_font);
 
 	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
 	Human human;
 	Draw draw;
 
-	double time = 0;
+	//double time = 0;
 
 	const std::wstring default_cmd = L"/X:1 /W:";
 
 	// 文字列を受け取った後
 	std::wstring message_cmd;
 
-	String editingText;
+	String editing_text;
 	
+	std::string file_name = "word.txt";
+	std::ofstream writing_file;
 
 	while (System::Update())
 	{
@@ -61,24 +71,29 @@ void Main()
 			ShellExecute(0, 0, exe, param, L"", SW_SHOW);
 			time = 0;
 		}*/
-
+		
 		// テクスチャを描く | Draw a texture
 		draw.characterDraw(human);
 
 		// キーボードからテキストを入力
 		TextInput::UpdateText(text);
 		if (isEnter(text)) {
-			message_cmd = default_cmd + stringToWstring(text);
+			message_cmd = default_cmd + sivStringToWstring(text);
 			ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
 			text = U"";
-		}
 
+			writing_file.open(file_name, std::ios::app);
+			writing_file << wstringToString(message_cmd) << std::endl;
+			
+			writing_file.close();
+		}
+		font(Unicode::Widen(wstringToString(message_cmd))).draw(20, 20);
 		// 未変換の文字入力を取得
-		editingText = TextInput::GetEditingText();
+		editing_text = TextInput::GetEditingText();
 
 		area.draw(ColorF{ 0.3 });
 
-		font(text + U'|' + editingText).draw(area.stretched(-20));
+		font(text + U'|' + editing_text).draw(area.stretched(-20));
 
 		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
 		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });

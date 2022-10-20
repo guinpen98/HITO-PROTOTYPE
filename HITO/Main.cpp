@@ -4,25 +4,18 @@
 #include <windows.h>
 #include <fstream>
 #include <string>
+#include <iostream>
 
-std::wstring sivStringToWstring(const String siv_str) {
-	std::wstring wstr;
-	for (int i = 0; i < (int)siv_str.size(); ++i) {
-		wstr.push_back(wchar_t(siv_str[i]));
-	}
-	return wstr;
-}
+//std::wstring sivStringToWstring(const String siv_str) {
+//	std::wstring wstr;
+//	for (int i = 0; i < (int)siv_str.size(); ++i) {
+//		wstr.push_back(wchar_t(siv_str[i]));
+//	}
+//	return wstr;
+//}
 bool isEnter(const String siv_str) {
 	if (siv_str.size() == 0) return false;
 	return char32_t(siv_str.back()) == U'\n';
-}
-std::string wstringToString(const std::wstring wstr) {
-	size_t i;
-	char* buffer = new char[wstr.size() * MB_CUR_MAX + 1];
-	wcstombs_s(&i, buffer, wstr.size() * MB_CUR_MAX + 1, wstr.c_str(), _TRUNCATE);
-	std::string result = buffer;
-	delete[] buffer;
-	return result;
 }
 
 void Main()
@@ -78,16 +71,19 @@ void Main()
 		// キーボードからテキストを入力
 		TextInput::UpdateText(text);
 		if (isEnter(text)) {
-			message_cmd = default_cmd + sivStringToWstring(text);
+			message_cmd = default_cmd + text.toWstr();
 			ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
-			text = U"";
 
 			writing_file.open(file_name, std::ios::app);
-			writing_file << wstringToString(message_cmd) << std::endl;
-			
+			std::string file_text = text.toUTF8();
+			file_text.pop_back();
+			writing_file << file_text << std::endl;
 			writing_file.close();
+
+
+			text = U"";
 		}
-		font(Unicode::Widen(wstringToString(message_cmd))).draw(20, 20);
+		font(text).draw(20, 20);
 		// 未変換の文字入力を取得
 		editing_text = TextInput::GetEditingText();
 

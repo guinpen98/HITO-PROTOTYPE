@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include "mecab.h"
 
 //std::wstring sivStringToWstring(const String siv_str) {
 //	std::wstring wstr;
@@ -74,10 +75,15 @@ void Main()
 			message_cmd = default_cmd + text.toWstr();
 			ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
 
-			writing_file.open(file_name, std::ios::app);
 			std::string file_text = text.toUTF8();
+
+			MeCab::Tagger* tagger = MeCab::createTagger("-Owakati");
+			const char* result = tagger->parse(file_text.c_str());
+
+			writing_file.open(file_name, std::ios::app);
 			file_text.pop_back();
 			writing_file << file_text << std::endl;
+			writing_file << result << std::endl;
 			writing_file.close();
 
 

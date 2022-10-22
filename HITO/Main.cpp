@@ -57,7 +57,8 @@ void Main()
 	std::string file_name = "word.txt";
 	std::ofstream writing_file;
 
-	OAVToSEN oav_to_sen("OAV.dat");
+	OAVToSEN oav_to_sen("OAV.dat", 1);
+	String gen_sen = Unicode::Widen(oav_to_sen.getSen());
 
 	while (System::Update())
 	{	
@@ -84,7 +85,7 @@ void Main()
 
 			text = U"";
 		}
-		font(text).draw(20, 20);
+		font(gen_sen).draw(20, 20);
 		// 未変換の文字入力を取得
 		editing_text = TextInput::GetEditingText();
 

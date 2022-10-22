@@ -153,6 +153,9 @@
     <ClCompile Include="draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="oav_to_sen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -795,6 +798,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="configure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oav_to_sen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -122,6 +122,7 @@
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="human.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="oav_to_sen.cpp" />
     <ClCompile Include="part.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -325,6 +326,7 @@
     <ClInclude Include="configure.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="human.h" />
+    <ClInclude Include="oav_to_sen.h" />
     <ClInclude Include="part.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

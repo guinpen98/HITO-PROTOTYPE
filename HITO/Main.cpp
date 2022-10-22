@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "mecab.h"
+#include "oav_to_sen.h"
 
 //std::wstring sivStringToWstring(const String siv_str) {
 //	std::wstring wstr;
@@ -46,8 +47,6 @@ void Main()
 	Human human;
 	Draw draw;
 
-	//double time = 0;
-
 	const std::wstring default_cmd = L"/X:1 /W:";
 
 	// 文字列を受け取った後
@@ -58,14 +57,10 @@ void Main()
 	std::string file_name = "word.txt";
 	std::ofstream writing_file;
 
+	OAVToSEN oav_to_sen("OAV.dat");
+
 	while (System::Update())
-	{
-		/*time += Scene::DeltaTime();
-		if (int(time) == 10) {
-			ShellExecute(0, 0, exe, param, L"", SW_SHOW);
-			time = 0;
-		}*/
-		
+	{	
 		// テクスチャを描く | Draw a texture
 		draw.characterDraw(human);
 
@@ -77,7 +72,7 @@ void Main()
 
 			std::string file_text = text.toUTF8();
 
-			MeCab::Tagger* tagger = MeCab::createTagger("-Owakati");
+			MeCab::Tagger* tagger = MeCab::createTagger("");
 			const char* result = tagger->parse(file_text.c_str());
 
 			writing_file.open(file_name, std::ios::app);

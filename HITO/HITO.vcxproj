@@ -120,8 +120,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="draw.cpp" />
+    <ClCompile Include="game_main.cpp" />
+    <ClCompile Include="home_main.cpp" />
     <ClCompile Include="human.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="siv_main.cpp" />
     <ClCompile Include="oav_to_sen.cpp" />
     <ClCompile Include="part.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -326,7 +328,10 @@
     <ClInclude Include="cfg.h" />
     <ClInclude Include="configure.h" />
     <ClInclude Include="draw.h" />
+    <ClInclude Include="game_main.h" />
+    <ClInclude Include="home_main.h" />
     <ClInclude Include="human.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="oav_to_sen.h" />
     <ClInclude Include="part.h" />
     <ClInclude Include="stdafx.h" />

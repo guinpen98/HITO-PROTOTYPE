@@ -803,5 +803,8 @@
     <ClInclude Include="oav_to_sen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

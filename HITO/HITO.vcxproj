@@ -323,6 +323,7 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cfg.h" />
     <ClInclude Include="configure.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="human.h" />

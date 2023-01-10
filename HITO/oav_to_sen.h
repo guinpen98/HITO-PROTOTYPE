@@ -17,7 +17,7 @@ private:
 	std::vector<std::string> o;
 	std::vector<std::string> a;
 	std::vector<std::string> v;
-	std::string sen = "初期化";
+	std::string sen = "init";
 	int rdOAVFile(std::string f_name);
 };
 #endif //!HITO_OAV_TO_SEN_H

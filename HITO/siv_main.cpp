@@ -5,21 +5,46 @@
 #include <iostream>
 
 #include "mecab.h"
+
 #include "oav_to_sen.h"
 #include "human.h"
 #include "draw.h"
 #include "game_main.h"
 
-bool isEnter(const String siv_str) {
+const wchar_t exe[] = L"softalk\\SofTalk.exe";
+const std::string file_name = "word.txt";
+const std::wstring default_cmd = L"/X:1 /W:";
+
+bool isEnter(const String& siv_str) {
 	if (siv_str.size() == 0) return false;
 	return char32_t(siv_str.back()) == U'\n';
 }
 
-void Main() {
-	wchar_t exe[] = L"C:\\Users\\yuri_\\Downloads\\stn019363\\softalk\\SofTalk.exe";
-	wchar_t param[] = L"/X:1 /W:こんにちは";
-	ShellExecute(0, 0, exe, param, L"", SW_SHOW);
+void input(String& text) {
+	// 入力を取ってくる
+	TextInput::UpdateText(text);
+	// エンターが押されているか
+	if (!isEnter(text)) return;
+	// 入力した内容を音声で出力
+	std::wstring message_cmd = default_cmd + text.toWstr();
+	ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
+	// MeCab
+	std::string file_text = text.toUTF8();
+	MeCab::Tagger* tagger = MeCab::createTagger("");
+	const char* result = tagger->parse(file_text.c_str());
+	// テキストを削除
+	text = U"";
+}
 
+void writeFile(const std::string& text) {
+	std::ofstream writing_file;
+	writing_file.open(file_name, std::ios::app);
+	writing_file << text << std::endl;
+	writing_file.close();
+}
+
+void Main() {
+	// Siv3D
 	Window::Resize(window_w, window_h);
 
 	// 背景の色を設定 | Set background color
@@ -31,30 +56,18 @@ void Main() {
 
 	constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
 
-	// 絵文字用フォントを作成 | Create a new emoji font
-	const Font emoji_font{ 60, Typeface::ColorEmoji };
-
-	// `font` が絵文字用フォントも使えるようにする | Set emojiFont as a fallback
-	font.addFallback(emoji_font);
-
 	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
 	Human human;
 	Draw draw;
 
-	const std::wstring default_cmd = L"/X:1 /W:";
-
-	// 文字列を受け取った後
-	std::wstring message_cmd;
-
 	String editing_text;
-	
-	std::string file_name = "word.txt";
-	std::ofstream writing_file;
 
+	// OAV
 	OAVToSEN oav_to_sen("OAV.dat", 1);
 	String gen_sen = Unicode::Widen(oav_to_sen.getSen());
 
-	Game::GameMain game_main;
+	// GameMain
+	HITO::GameMain game_main;
 	game_main.main_list[0]->main();
 
 	while (System::Update()) {	
@@ -62,31 +75,15 @@ void Main() {
 		draw.characterDraw(human);
 
 		// キーボードからテキストを入力
-		TextInput::UpdateText(text);
-		if (isEnter(text)) {
-			message_cmd = default_cmd + text.toWstr();
-			ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
+		input(text);
 
-			std::string file_text = text.toUTF8();
-
-			MeCab::Tagger* tagger = MeCab::createTagger("");
-			const char* result = tagger->parse(file_text.c_str());
-
-			writing_file.open(file_name, std::ios::app);
-			file_text.pop_back();
-			writing_file << file_text << std::endl;
-			writing_file << result << std::endl;
-			writing_file.close();
-
-
-			text = U"";
-		}
+		// OVA
 		font(gen_sen).draw(20, 20);
+
 		// 未変換の文字入力を取得
 		editing_text = TextInput::GetEditingText();
 
 		area.draw(ColorF{ 0.3 });
-
 		font(text + U'|' + editing_text).draw(area.stretched(-20));
 
 		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor

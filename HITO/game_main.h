@@ -4,16 +4,16 @@
 #include <memory>
 #include <vector>
 
-#include "main.h"
-#include "home_main.h"
+#include "scene.h"
+#include "home_scene.h"
 
-namespace Game {
+namespace HITO {
 	class GameMain {
 	public:
-		std::vector<std::unique_ptr<Main>> main_list;
+		std::vector<std::unique_ptr<Scene>> main_list;
 		explicit GameMain() {
 			main_list.resize(1);
-			main_list[0] = std::make_unique<HomeMain>();
+			main_list[0] = std::make_unique<HomeScene>();
 		}
 	};
 }

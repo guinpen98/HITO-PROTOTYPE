@@ -121,7 +121,7 @@
   <ItemGroup>
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="game_main.cpp" />
-    <ClCompile Include="home_main.cpp" />
+    <ClCompile Include="home_scene.cpp" />
     <ClCompile Include="human.cpp" />
     <ClCompile Include="siv_main.cpp" />
     <ClCompile Include="oav_to_sen.cpp" />
@@ -329,9 +329,9 @@
     <ClInclude Include="configure.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="game_main.h" />
-    <ClInclude Include="home_main.h" />
+    <ClInclude Include="home_scene.h" />
     <ClInclude Include="human.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="oav_to_sen.h" />
     <ClInclude Include="part.h" />
     <ClInclude Include="stdafx.h" />

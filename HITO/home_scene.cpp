@@ -1,6 +1,7 @@
-﻿#include "stdafx.h"
+﻿#include <iostream>
+
+#include "stdafx.h"
 #include "home_scene.h"
-#include <iostream>
 
 namespace HITO {
 	void HomeScene::main() {

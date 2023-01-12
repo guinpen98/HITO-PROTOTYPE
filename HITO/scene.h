@@ -4,7 +4,8 @@
 namespace HITO {
 	class Scene {
 	public:
-		virtual void main() = 0;
+		virtual ~Scene() {}
+;		virtual void main() = 0;
 	};
 }
 

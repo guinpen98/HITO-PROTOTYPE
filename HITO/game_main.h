@@ -2,7 +2,7 @@
 #define HITO_GAME_MAIN_H
 
 #include <memory>
-#include <vector>
+#include <array>
 
 #include "scene.h"
 #include "home_scene.h"
@@ -10,10 +10,9 @@
 namespace HITO {
 	class GameMain {
 	public:
-		std::vector<std::unique_ptr<Scene>> main_list;
+		std::array<std::unique_ptr<Scene>, 1> scene_list;
 		explicit GameMain() {
-			main_list.resize(1);
-			main_list[0] = std::make_unique<HomeScene>();
+			scene_list[0] = std::make_unique<HomeScene>();
 		}
 	};
 }

@@ -1,5 +1,4 @@
 ﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.5
-#include <windows.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -8,33 +7,10 @@
 
 #include "oav_to_sen.h"
 #include "human.h"
-#include "draw.h"
+#include "drawing.h"
 #include "game_main.h"
 
-const wchar_t exe[] = L"softalk\\SofTalk.exe";
 const std::string file_name = "word.txt";
-const std::wstring default_cmd = L"/X:1 /W:";
-
-bool isEnter(const String& siv_str) {
-	if (siv_str.size() == 0) return false;
-	return char32_t(siv_str.back()) == U'\n';
-}
-
-void input(String& text) {
-	// 入力を取ってくる
-	TextInput::UpdateText(text);
-	// エンターが押されているか
-	if (!isEnter(text)) return;
-	// 入力した内容を音声で出力
-	std::wstring message_cmd = default_cmd + text.toWstr();
-	ShellExecute(0, 0, exe, message_cmd.c_str(), L"", SW_SHOW);
-	// MeCab
-	std::string file_text = text.toUTF8();
-	MeCab::Tagger* tagger = MeCab::createTagger("");
-	const char* result = tagger->parse(file_text.c_str());
-	// テキストを削除
-	text = U"";
-}
 
 void writeFile(const std::string& text) {
 	std::ofstream writing_file;
@@ -56,9 +32,7 @@ void Main() {
 
 	constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
 
-	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
-	Human human;
-	Draw draw;
+	std::unique_ptr<HITO::Drawing> drawing(new HITO::Drawing);
 
 	String editing_text;
 
@@ -68,14 +42,14 @@ void Main() {
 
 	// GameMain
 	HITO::GameMain game_main;
-	game_main.main_list[0]->main();
+	game_main.scene_list[0]->main();
 
 	while (System::Update()) {	
-		// テクスチャを描く | Draw a texture
-		draw.characterDraw(human);
+		// テクスチャを描く | Drawing a texture
+		drawing->characterDraw();
 
 		// キーボードからテキストを入力
-		input(text);
+		drawing->input(text);
 
 		// OVA
 		font(gen_sen).draw(20, 20);
@@ -86,7 +60,7 @@ void Main() {
 		area.draw(ColorF{ 0.3 });
 		font(text + U'|' + editing_text).draw(area.stretched(-20));
 
-		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
+		// マウスカーソルに追随する半透明な円を描く | Drawing a red transparent circle that follows the mouse cursor
 		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });
 	}
 }

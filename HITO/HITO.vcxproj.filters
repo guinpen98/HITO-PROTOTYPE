@@ -147,7 +147,7 @@
     <ClCompile Include="human.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="draw.cpp">
+    <ClCompile Include="drawing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="oav_to_sen.cpp">
@@ -800,7 +800,7 @@
     <ClInclude Include="human.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="draw.h">
+    <ClInclude Include="drawing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="configure.h">

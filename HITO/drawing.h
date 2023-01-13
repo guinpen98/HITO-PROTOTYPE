@@ -2,7 +2,9 @@
 #define HITO_DRAW_H
 #include <memory>
 #include <array>
+
 #include "human.h"
+#include "siv_config.h"
 
 namespace HITO {
 	class Drawing {
@@ -11,9 +13,15 @@ namespace HITO {
 		std::unique_ptr<Human> human;
 		const std::wstring default_cmd = L"/X:1 /W:";
 		const std::wstring exe = L"softalk\\SofTalk.exe";
+		std::unique_ptr<SivConfig> siv_config;
+		String text;
+		std::string out_sen;
 		bool isEnter(const String& siv_str)const;
+		void characterDraw()const;
+		void sentenceDraw()const;
+		void textBoxDraw()const;
 	public:
-		Drawing() : human(new Human()) {
+		Drawing() : human(new Human()), siv_config(new SivConfig()) {
 			textures[0].reset(new Texture(U"img/human/kuchi1.png"));
 			textures[1].reset(new Texture(U"img/human/kuchi2.png"));
 			textures[2].reset(new Texture(U"img/human/kuchi3.png"));
@@ -29,8 +37,9 @@ namespace HITO {
 			textures[12].reset(new Texture(U"img/human/dotaimae.png"));
 			textures[13].reset(new Texture(U"img/human/dotaiushiro.png"));
 		}
-		void characterDraw()const;
-		void input(String& text);
+		void init()const;
+		void input();
+		void draw()const;
 	};
 }
 #endif //!HITO_DRAW_H

@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 
-#include "mecab.h"
-
 #include "oav_to_sen.h"
 #include "human.h"
 #include "drawing.h"
@@ -20,48 +18,24 @@ void writeFile(const std::string& text) {
 }
 
 void Main() {
-	// Siv3D
-	Window::Resize(window_w, window_h);
-
-	// 背景の色を設定 | Set background color
-	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
-
-	const Font font{ 40 };
-
-	String text;
-
-	constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
-
-	std::unique_ptr<HITO::Drawing> drawing(new HITO::Drawing);
-
-	String editing_text;
+	std::unique_ptr<HITO::GameMain> game_main(new HITO::GameMain);
 
 	// OAV
-	OAVToSEN oav_to_sen("OAV.dat", 1);
-	String gen_sen = Unicode::Widen(oav_to_sen.getSen());
+	/*OAVToSEN oav_to_sen("OAV.dat", 1);
+	String gen_sen = Unicode::Widen(oav_to_sen.getSen());*/
 
-	// GameMain
-	HITO::GameMain game_main;
-	game_main.scene_list[0]->main();
+	std::unique_ptr<HITO::Drawing> drawing(new HITO::Drawing);
+	drawing->init();
 
-	while (System::Update()) {	
-		// テクスチャを描く | Drawing a texture
-		drawing->characterDraw();
-
+	while (System::Update()) {
 		// キーボードからテキストを入力
-		drawing->input(text);
+		drawing->input();
 
-		// OVA
-		font(gen_sen).draw(20, 20);
+		// ゲームシステム
+		game_main->scene_list[0]->main();
 
-		// 未変換の文字入力を取得
-		editing_text = TextInput::GetEditingText();
-
-		area.draw(ColorF{ 0.3 });
-		font(text + U'|' + editing_text).draw(area.stretched(-20));
-
-		// マウスカーソルに追随する半透明な円を描く | Drawing a red transparent circle that follows the mouse cursor
-		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });
+		// 描画
+		drawing->draw();
 	}
 }
 

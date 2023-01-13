@@ -162,6 +162,9 @@
     <ClCompile Include="siv_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="siv_config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -803,9 +806,6 @@
     <ClInclude Include="drawing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="configure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="oav_to_sen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -819,6 +819,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="configure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="siv_config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

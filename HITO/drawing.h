@@ -5,6 +5,7 @@
 
 #include "human.h"
 #include "siv_config.h"
+#include "clock.h"
 
 namespace HITO {
 	class Drawing {
@@ -16,12 +17,13 @@ namespace HITO {
 		std::unique_ptr<SivConfig> siv_config;
 		String text;
 		std::string out_sen;
+		std::unique_ptr<Clock> clock;
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
 		void sentenceDraw()const;
 		void textBoxDraw()const;
 	public:
-		Drawing() : human(new Human()), siv_config(new SivConfig()) {
+		Drawing() : human(new Human()), siv_config(new SivConfig()), clock(new Clock()) {
 			textures[0].reset(new Texture(U"img/human/kuchi1.png"));
 			textures[1].reset(new Texture(U"img/human/kuchi2.png"));
 			textures[2].reset(new Texture(U"img/human/kuchi3.png"));
@@ -39,8 +41,9 @@ namespace HITO {
 		}
 		void init()const;
 		void input();
+		void clockDrawing();
 		void homeSceneDraw()const;
 		void dialogueSceneDraw()const;
 	};
 }
-#endif //!HITO_DRAW_H
+#endif // !HITO_DRAW_H

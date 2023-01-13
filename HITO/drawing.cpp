@@ -1,4 +1,5 @@
 ﻿#include <windows.h>
+#include <string>
 
 #include "mecab.h"
 
@@ -91,6 +92,12 @@ namespace HITO {
 		out_sen = result;
 		// テキストを削除
 		text = U"";
+	}
+
+	void Drawing::clockDrawing() {
+		clock->update();
+		String time = (clock->hour < 10 ? U"0" : U"") + ToString(clock->hour) + U"：" + ToString(clock->min);
+		siv_config->font(time).draw(900, 10);
 	}
 
 	void Drawing::homeSceneDraw() const {

@@ -6,8 +6,7 @@
 
 constexpr Rect area{ window_w / 2 - 250, window_h - 200, 500, 160 };
 
-struct SivConfig
-{
+struct SivConfig {
 	const Font font{ 40 };
 };
 

@@ -39,7 +39,8 @@ namespace HITO {
 		}
 		void init()const;
 		void input();
-		void draw()const;
+		void homeSceneDraw()const;
+		void dialogueSceneDraw()const;
 	};
 }
 #endif //!HITO_DRAW_H

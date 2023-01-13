@@ -70,18 +70,10 @@ namespace HITO {
 		siv_config->font(text + U'|' + editing_text).draw(area.stretched(-20));
 	}
 
-	void Drawing::draw() const {
-		// テクスチャを描く | Drawing a texture
+	void Drawing::dialogueSceneDraw() const {
 		characterDraw();
-
-		// テキストボックスの描画
 		textBoxDraw();
-
-		// テキストの描画
 		sentenceDraw();
-
-		// マウスカーソルに追随する半透明な円を描く | Drawing a red transparent circle that follows the mouse cursor
-		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });
 	}
 
 	void Drawing::input() {
@@ -100,6 +92,10 @@ namespace HITO {
 		// テキストを削除
 		text = U"";
 	}
+
+	void Drawing::homeSceneDraw() const {
+		characterDraw();
+	}	
 
 	bool Drawing::isEnter(const String& siv_str)const {
 		if (siv_str.size() == 0) return false;

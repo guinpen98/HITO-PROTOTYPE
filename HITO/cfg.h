@@ -1,5 +1,5 @@
-﻿#ifndef PARSER_CFG_H
-#define PARSER_CFG_H
+﻿#ifndef HITO_CFG_H
+#define HITO_CFG_H
 
 #include <iostream>
 #include <sstream>
@@ -165,4 +165,4 @@ std::string parse(const std::string& sen, const std::vector<std::vector<std::str
 	return isS(input, dic);
 }
 
-#endif //!PARSER_CFG_H
+#endif //!HITO_CFG_H

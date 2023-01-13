@@ -27,15 +27,33 @@ void Main() {
 	std::unique_ptr<HITO::Drawing> drawing(new HITO::Drawing);
 	drawing->init();
 
+	GameScene game_scene = GameScene::HOME;
+
 	while (System::Update()) {
-		// キーボードからテキストを入力
-		drawing->input();
+		// ボタン
+		switch (game_scene) {
+		case GameScene::HOME:
+			if (SimpleGUI::Button(U"対話", Vec2{ 100, 250 }, 200)) {
+				game_scene = GameScene::DIALOGUE;
+			}
+			drawing->homeSceneDraw();
+			break;
+		case GameScene::DIALOGUE:
+			if (SimpleGUI::Button(U"ホーム", Vec2{ 100, 250 }, 200)) {
+				game_scene = GameScene::HOME;
+			}
+			// キーボードからテキストを入力
+			drawing->input();
 
-		// ゲームシステム
-		game_main->scene_list[0]->main();
+			// ゲームシステム
+			game_main->scene_list[0]->main();
 
-		// 描画
-		drawing->draw();
+			// 描画
+			drawing->dialogueSceneDraw();
+			break;
+		default:
+			break;
+		}
 	}
 }
 

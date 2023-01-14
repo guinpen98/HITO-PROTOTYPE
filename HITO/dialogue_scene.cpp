@@ -2,7 +2,7 @@
 #include "dialogue_scene.h"
 
 namespace HITO {
-    void DialogueScene::update() {
-
+	GameScene DialogueScene::update() {
+		return GameScene::DIALOGUE;
     }
 }

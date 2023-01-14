@@ -7,7 +7,7 @@ namespace HITO {
 	class DialogueScene : public Scene {
 	public:
 		~DialogueScene() {}
-		void update() override;
+		GameScene update() override;
 	};
 }
 

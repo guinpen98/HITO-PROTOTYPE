@@ -7,7 +7,7 @@ namespace HITO {
 	class HomeScene : public Scene {
 	public:
 		~HomeScene() {}
-		void update() override;
+		GameScene update() override;
 	};
 }
 

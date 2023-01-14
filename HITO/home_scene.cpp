@@ -1,10 +1,8 @@
-﻿#include <iostream>
-
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "home_scene.h"
 
 namespace HITO {
-	void HomeScene::update() {
-		
+	GameScene HomeScene::update() {
+		return GameScene::HOME;
 	}
 }

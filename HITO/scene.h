@@ -1,11 +1,13 @@
 ﻿#ifndef HITO_SCENE_H
 #define HITO_SCENE_H
 
+#include "siv_config.h"
+
 namespace HITO {
 	class Scene {
 	public:
 		virtual ~Scene() {}
-;		virtual void update() = 0;
+		virtual GameScene update() = 0;
 	};
 }
 

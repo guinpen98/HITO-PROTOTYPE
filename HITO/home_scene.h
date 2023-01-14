@@ -1,5 +1,5 @@
-﻿#ifndef HITO_HOME_MAIN_H
-#define HITO_HOME_MAIN_H
+﻿#ifndef HITO_HOME_SCENE_H
+#define HITO_HOME_SCENE_H
 
 #include "scene.h"
 
@@ -7,8 +7,8 @@ namespace HITO {
 	class HomeScene : public Scene {
 	public:
 		~HomeScene() {}
-		void main() override;
+		void update() override;
 	};
 }
 
-#endif // !HITO_HOME_MAIN_H
+#endif // !HITO_HOME_SCENE_H

@@ -4,8 +4,7 @@
 #include "clock.h"
 
 namespace HITO {
-	void Clock::update()
-	{
+	void Clock::update() {
 		time_t timer = time(NULL);
 		struct tm local_time;
 		localtime_s(&local_time, &timer);

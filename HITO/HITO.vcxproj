@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clock.cpp" />
+    <ClCompile Include="dialogue_scene.cpp" />
     <ClCompile Include="drawing.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
@@ -330,6 +331,7 @@
     <ClInclude Include="cfg.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="configure.h" />
+    <ClInclude Include="dialogue_scene.h" />
     <ClInclude Include="drawing.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />

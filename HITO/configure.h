@@ -4,6 +4,8 @@
 constexpr int window_w = 1080;
 constexpr int window_h = 720;
 
+constexpr int scene_num = 2;
+
 enum class GameScene {
 	HOME
 	, DIALOGUE

@@ -5,7 +5,6 @@
 
 #include "oav_to_sen.h"
 #include "human.h"
-#include "drawing.h"
 #include "game_main.h"
 
 const std::string file_name = "word.txt";
@@ -24,30 +23,8 @@ void Main() {
 	/*OAVToSEN oav_to_sen("OAV.dat", 1);
 	String gen_sen = Unicode::Widen(oav_to_sen.getSen());*/
 
-	std::unique_ptr<HITO::Drawing> drawing(new HITO::Drawing);
-	drawing->init();
-
-	GameScene game_scene = GameScene::HOME;
-
 	while (System::Update()) {
-		drawing->clockDrawing();
-		// ボタン
-		switch (game_scene) {
-		case GameScene::HOME:
-			if (SimpleGUI::Button(U"対話", Vec2{ 100, 250 }, 200))
-				game_scene = GameScene::DIALOGUE;
-			drawing->homeSceneDraw();
-			break;
-		case GameScene::DIALOGUE:
-			if (SimpleGUI::Button(U"ホーム", Vec2{ 100, 250 }, 200))
-				game_scene = GameScene::HOME;
-			drawing->input();
-			game_main->scene_list[0]->main();
-			drawing->dialogueSceneDraw();
-			break;
-		default:
-			break;
-		}
+		game_main->update();
 	}
 }
 

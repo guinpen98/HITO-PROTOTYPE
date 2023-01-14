@@ -4,7 +4,7 @@
 #include "home_scene.h"
 
 namespace HITO {
-	void HomeScene::main() {
-		std::cout << "a\n";
+	void HomeScene::update() {
+		
 	}
 }

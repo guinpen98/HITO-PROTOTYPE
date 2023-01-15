@@ -20,7 +20,7 @@ namespace HITO {
 		std::unique_ptr<Clock> clock;
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
-		void sentenceDraw()const;
+		void sentenceDraw(std::string& sen);
 		void textBoxDraw()const;
 	public:
 		Drawing() : human(new Human()), siv_config(new SivConfig()), clock(new Clock()) {
@@ -40,10 +40,10 @@ namespace HITO {
 			textures[13].reset(new Texture(U"img/human/dotaiushiro.png"));
 		}
 		void init()const;
-		void input();
+		std::string input();
 		void clockDrawing();
 		void homeSceneDraw()const;
-		void dialogueSceneDraw()const;
+		void dialogueSceneDraw(std::string& sen);
 	};
 }
 #endif // !HITO_DRAW_H

@@ -8,6 +8,7 @@ namespace HITO {
 	public:
 		~DialogueScene() {}
 		GameScene update() override;
+		std::string update(std::string& input);
 	};
 }
 

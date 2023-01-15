@@ -5,21 +5,29 @@ void HITO::GameMain::update() {
 	drawing->clockDrawing();
 	switch (current_scene) {
 	case GameScene::HOME:
-		scene_list[int(current_scene)]->update();
-		drawing->homeSceneDraw();
-
-		if (SimpleGUI::Button(U"対話", Vec2{ 850, 500 }, 200))
-			current_scene = GameScene::DIALOGUE;
+		homeScene();
 		break;
 	case GameScene::DIALOGUE:
-		drawing->input();
-		scene_list[int(current_scene)]->update();
-		drawing->dialogueSceneDraw();
-
-		if (SimpleGUI::Button(U"ホーム", Vec2{ 850, 500 }, 200))
-			current_scene = GameScene::HOME;
+		dialogueScene();
 		break;
 	default:
 		break;
 	}
+}
+
+void HITO::GameMain::homeScene() {
+	home_scene->update();
+	drawing->homeSceneDraw();
+
+	if (SimpleGUI::Button(U"対話", Vec2{ 850, 500 }, 200))
+		current_scene = GameScene::DIALOGUE;
+}
+
+void HITO::GameMain::dialogueScene() {
+	std::string input = drawing->input();
+	std::string sen = dialogue_scene->update(input);
+	drawing->dialogueSceneDraw(sen);
+
+	if (SimpleGUI::Button(U"ホーム", Vec2{ 850, 500 }, 200))
+		current_scene = GameScene::HOME;
 }

@@ -12,14 +12,17 @@ namespace HITO {
 	class GameMain {
 		std::unique_ptr<Drawing> drawing;
 		GameScene current_scene = GameScene::HOME;
+		std::unique_ptr<HomeScene> home_scene;
+		std::unique_ptr<DialogueScene> dialogue_scene;
 	public:
-		std::array<std::unique_ptr<Scene>, scene_num> scene_list;
 		explicit GameMain() : drawing(new Drawing) {
 			drawing->init();
-			scene_list[0] = std::make_unique<HomeScene>();
-			scene_list[1] = std::make_unique<DialogueScene>();
+			home_scene = std::make_unique<HomeScene>();
+			dialogue_scene = std::make_unique<DialogueScene>();
 		}
 		void update();
+		void homeScene();
+		void dialogueScene();
 	};
 }
 

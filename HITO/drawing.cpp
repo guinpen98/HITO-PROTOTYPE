@@ -1,8 +1,6 @@
 ﻿#include <windows.h>
 #include <string>
 
-#include "mecab.h"
-
 #include "stdafx.h"
 #include "drawing.h"
 
@@ -59,7 +57,8 @@ namespace HITO {
 		textures[9]->rotatedAt(Vec2{ textures[9]->size().x / 2 + 60, textures[9]->size().y / 2 + 129 }, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(human->migimayu.getX(), human->migimayu.getY());
 	}
 
-	void Drawing::sentenceDraw() const {
+	void Drawing::sentenceDraw(std::string& sen) {
+		if (sen != "EOS\n") out_sen = sen;
 		siv_config->font(Unicode::FromUTF8(out_sen)).draw(20, 20);
 	}
 
@@ -71,27 +70,25 @@ namespace HITO {
 		siv_config->font(text + U'|' + editing_text).draw(area.stretched(-20));
 	}
 
-	void Drawing::dialogueSceneDraw() const {
+	void Drawing::dialogueSceneDraw(std::string& sen) {
 		characterDraw();
 		textBoxDraw();
-		sentenceDraw();
+		sentenceDraw(sen);
 	}
 
-	void Drawing::input() {
+	std::string Drawing::input() {
 		// 入力を取ってくる
 		TextInput::UpdateText(text);
 		// エンターが押されているか
-		if (!isEnter(text)) return;
+		if (!isEnter(text)) return "";
 		// 入力した内容を音声で出力
 		std::wstring message_cmd = default_cmd + text.toWstr();
 		ShellExecute(0, 0, exe.c_str(), message_cmd.c_str(), L"", SW_SHOW);
-		// MeCab
-		std::string file_text = text.toUTF8();
-		MeCab::Tagger* tagger = MeCab::createTagger("");
-		const std::string result = tagger->parse(file_text.c_str());
-		out_sen = result;
+		// stringに変換
+		std::string s_text = text.toUTF8();
 		// テキストを削除
 		text = U"";
+		return s_text;
 	}
 
 	void Drawing::clockDrawing() {
@@ -102,7 +99,7 @@ namespace HITO {
 
 	void Drawing::homeSceneDraw() const {
 		characterDraw();
-	}	
+	}
 
 	bool Drawing::isEnter(const String& siv_str)const {
 		if (siv_str.size() == 0) return false;

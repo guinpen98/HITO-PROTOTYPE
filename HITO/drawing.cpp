@@ -28,8 +28,7 @@ namespace HITO {
 		}
 		kuchi_texture.rotatedAt(Vec2{ kuchi_texture.size().x / 2, kuchi_texture.size().y / 2 }, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(human->kuchi.getX(), human->kuchi.getY());
 		Texture me_texture = *textures[3];
-		switch (int(Scene::Time() * 70) % 150)
-		{
+		switch (int(Scene::Time() * 70) % 150) {
 		case 0:
 			me_texture = *textures[4];
 			break;
@@ -57,37 +56,34 @@ namespace HITO {
 		textures[9]->rotatedAt(Vec2{ textures[9]->size().x / 2 + 60, textures[9]->size().y / 2 + 129 }, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(human->migimayu.getX(), human->migimayu.getY());
 	}
 
-	void Drawing::sentenceDraw(std::string& sen) {
-		if (sen != "EOS\n") out_sen = sen;
+	void Drawing::sentenceDraw(const std::string& sen) {
+		if (sen != "") out_sen = sen;
 		siv_config->font(Unicode::FromUTF8(out_sen)).draw(20, 20);
 	}
 
 	void Drawing::textBoxDraw() const {
-		// 未変換の文字入力を取得
-		String editing_text = TextInput::GetEditingText();
+		String editing_text = TextInput::GetEditingText(); // 文字入力を取得
+
 		// テキストボックスの描画
 		area.draw(ColorF{ 0.3 });
 		siv_config->font(text + U'|' + editing_text).draw(area.stretched(-20));
 	}
 
-	void Drawing::dialogueSceneDraw(std::string& sen) {
+	void Drawing::dialogueSceneDraw(const std::string& sen) {
 		characterDraw();
 		textBoxDraw();
 		sentenceDraw(sen);
 	}
 
 	std::string Drawing::input() {
-		// 入力を取ってくる
 		TextInput::UpdateText(text);
-		// エンターが押されているか
-		if (!isEnter(text)) return "";
-		// 入力した内容を音声で出力
+		if (!isEnter(text)) return ""; // 未入力
+		
 		std::wstring message_cmd = default_cmd + text.toWstr();
-		ShellExecute(0, 0, exe.c_str(), message_cmd.c_str(), L"", SW_SHOW);
-		// stringに変換
+		ShellExecute(0, 0, exe.c_str(), message_cmd.c_str(), L"", SW_SHOW); // 音声出力
+
 		std::string s_text = text.toUTF8();
-		// テキストを削除
-		text = U"";
+		text = U""; // 入力を削除
 		return s_text;
 	}
 
@@ -107,9 +103,7 @@ namespace HITO {
 	}
 
 	void Drawing::init()const {
-		// Siv3D
 		Window::Resize(window_w, window_h);
-		// 背景の色を設定 | Set background color
 		Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 	}
 }

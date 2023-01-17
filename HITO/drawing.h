@@ -1,5 +1,5 @@
-﻿#ifndef HITO_DRAW_H
-#define HITO_DRAW_H
+﻿#ifndef HITO_DRAWING_H
+#define HITO_DRAWING_H
 #include <memory>
 #include <array>
 
@@ -20,7 +20,7 @@ namespace HITO {
 		std::unique_ptr<Clock> clock;
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
-		void sentenceDraw(std::string& sen);
+		void sentenceDraw(const std::string& sen);
 		void textBoxDraw()const;
 	public:
 		Drawing() : human(new Human()), siv_config(new SivConfig()), clock(new Clock()) {
@@ -43,7 +43,7 @@ namespace HITO {
 		std::string input();
 		void clockDrawing();
 		void homeSceneDraw()const;
-		void dialogueSceneDraw(std::string& sen);
+		void dialogueSceneDraw(const std::string& sen);
 	};
 }
-#endif // !HITO_DRAW_H
+#endif // !HITO_DRAWING_H

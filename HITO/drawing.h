@@ -17,7 +17,7 @@ namespace HITO {
 		std::unique_ptr<SivConfig> siv_config;
 		String text;
 		std::string out_sen;
-		std::unique_ptr<Clock> clock;
+		std::unique_ptr<class Clock> clock;
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
 		void sentenceDraw(const std::string& sen);

@@ -2,13 +2,11 @@
 #define HITO_DIALOGUE_SCENE_H
 
 #include "scene.h"
-#include "word.h"
 
 namespace HITO {
 	class DialogueScene : public Scene {
 	private:
-		Word extractMecabResult(const std::string& result);
-		void combineMorphemes(Word& word);
+		class Sentence extractMecabResult(const std::string& result);
 
 	public:
 		~DialogueScene() {}

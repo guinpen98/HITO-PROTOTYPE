@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "dialogue_scene.h"
+#include "sentence.h"
 
 namespace HITO {
 	constexpr int char_size = 256;
@@ -19,10 +20,11 @@ namespace HITO {
 		return tmp.toUTF8();
 	}
 
-	Word DialogueScene::extractMecabResult(const std::string& result) {
+	Sentence DialogueScene::extractMecabResult(const std::string& result) {
 		StringList word_list;
 		StringList category_list1;
 		StringList category_list2;
+		int cnt = 0;
 
 		std::stringstream ss_result(result);
 		std::string line;
@@ -42,8 +44,9 @@ namespace HITO {
 
 			category_list1.push_back(category1);
 			category_list2.push_back(category2);
+			cnt++;
 		}
-		return Word(word_list, category_list1, category_list2);
+		return Sentence(word_list, category_list1, category_list2, cnt);
 	}
 
 	GameScene DialogueScene::update() {
@@ -55,7 +58,8 @@ namespace HITO {
 		
 		MeCab::Tagger* tagger = MeCab::createTagger("");
 		const std::string result = tagger->parse(input.c_str());
-		Word word = extractMecabResult(result);
+		Sentence sentence = extractMecabResult(result);
+		sentence.preprocess();
 
 		return result;
 	}

@@ -174,7 +174,7 @@
     <ClCompile Include="switching_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="word.cpp">
+    <ClCompile Include="sentence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -848,7 +848,7 @@
     <ClInclude Include="switching_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="word.h">
+    <ClInclude Include="sentence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

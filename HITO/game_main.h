@@ -13,7 +13,7 @@ namespace HITO {
 		std::unique_ptr<Drawing> drawing;
 		GameScene current_scene = GameScene::HOME;
 		std::unique_ptr<HomeScene> home_scene;
-		std::unique_ptr<DialogueScene> dialogue_scene;
+		std::unique_ptr<class DialogueScene> dialogue_scene;
 	public:
 		explicit GameMain() : drawing(new Drawing) {
 			drawing->init();

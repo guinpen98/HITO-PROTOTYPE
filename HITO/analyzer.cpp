@@ -43,8 +43,8 @@ namespace HITO {
 		std::string output = check(sentence, isN, isVA, sentence.size() - 1, "VP");
 		if (!output.empty()) return output;
 
-		//output = check(sentence, isV, isVA, sentence.size() - 1, "VP");
-		//if (!output.empty()) return output;
+		output = check(sentence, isV, isVA, sentence.size() - 1, "VP");
+		if (!output.empty()) return output;
 
 		return std::string();
 	}
@@ -64,7 +64,7 @@ namespace HITO {
 			if (sentence.isThisType("形容詞")) return "(AP " + sentence.getSentence() + ")";
 			return std::string();
 		}
-		std::string output = check(sentence, isN, isPP, sentence.size() - 1, "AP");
+		std::string output = check(sentence, isN, isPP, sentence.size() - 1, "AP"); // 連体化の確認
 		if (!output.empty()) return output;
 	
 		output = check(sentence, isAP, isAP, 1, "AP");
@@ -90,36 +90,32 @@ namespace HITO {
 		else return output;
 	}
 
-	std::vector<std::string> isS(const Sentence& sentence) {
-		std::vector<std::string> result;
-		if (sentence.size() < 3) {
-			result.push_back(sentence.getSentence());
-			return result;
-		}
+	std::string isS(const Sentence& sentence) {
+		if (sentence.size() < 3) return sentence.getSentence();
 
 		std::string output = check(sentence, isNP, isV, sentence.size() - 1, "S");
-		if (!output.empty()) result.push_back(output);
+		if (!output.empty()) return output;
 		output = check(sentence, isNP, isV, sentence.size() - 2, "S");
-		if (!output.empty()) result.push_back(output);
+		if (!output.empty()) return output;
 
 		for (int i = 2; i <= sentence.size() - 1; i++) {
 			output = check(sentence, isNP, isAP, i, "S");
-			if (!output.empty()) result.push_back(output);
+			if (!output.empty()) return output;
 		}
 
 		for (int i = 2; i <= sentence.size() - 2; i++) {
 			output = check(sentence, isNP, isVP, i, "S");
-			if (!output.empty()) result.push_back(output);
+			if (!output.empty()) return output;
 		}
 
-		return result;
+		return std::string();
 	}
 
-	std::vector<std::string> Analyzer::parse(const Sentence& sentence) {
+	std::string Analyzer::parse(const Sentence& sentence) {
 		return isS(sentence);
 	}
 
-	std::vector<std::string> Analyzer::analyze(const Sentence& sentence) {
+	std::string Analyzer::analyze(const Sentence& sentence) {
 		return parse(sentence);
 	}
 }

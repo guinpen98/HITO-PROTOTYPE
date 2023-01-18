@@ -58,7 +58,7 @@ namespace HITO {
 
 	void Drawing::sentenceDraw(const std::string& sen) {
 		if (sen != "") out_sen = sen;
-		siv_config->font(Unicode::FromUTF8(out_sen)).draw(20, 20);
+		siv_config->font(Unicode::FromUTF8(out_sen)).draw(20, 60);
 	}
 
 	void Drawing::textBoxDraw() const {

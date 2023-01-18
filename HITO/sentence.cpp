@@ -4,8 +4,14 @@
 #include "sentence.h"
 
 namespace HITO {
+	struct TypePair {
+		std::string forward;
+		std::string backward;
+	};
+
 	const std::array<std::string, 7> remove_types = { "副詞", "接続詞", "感動詞", "記号", "フィラー", "その他", "未知語" };
 	const std::array<std::string, 2> combine_types = { "連体詞", "接頭詞" };
+	const std::array<TypePair, 2> combine_type_pairs = { TypePair{"名詞", "名詞"}, TypePair{"助動詞", "助詞"} };
 
 	void Sentence::dealUnnecessaryTypes() {
 		for (int i = 0; i < size(); ++i) {
@@ -23,12 +29,11 @@ namespace HITO {
 		}
 	}
 
-	void Sentence::dealCompoundNoun() {
+	void Sentence::combineTypes() {
 		for (int i = 0; i < size() - 1; ++i) {
-			if (morphemes[i].type1 != "名詞") continue;
-			if (morphemes[i + 1].type1 != "名詞") continue;
-			morphemes[i + 1].word = morphemes[i].word + morphemes[i + 1].word; // 結合
-			morphemes.erase(morphemes.begin() + i);
+			if (!isCombine(morphemes[i].type1, morphemes[i + 1].type1)) continue;
+			morphemes[i].word += morphemes[i + 1].word; // 結合
+			morphemes.erase(morphemes.begin() + i + 1);
 			--i;
 			--num;
 		}
@@ -46,9 +51,15 @@ namespace HITO {
 		return false;
 	}
 
+	bool Sentence::isCombine(const std::string& type1, const std::string& type2) const {
+		for (int i = 0; i < combine_type_pairs.size(); ++i)
+			if (type1 == combine_type_pairs[i].forward && type2 == combine_type_pairs[i].backward) return true;
+		return false;
+	}
+
 	bool Sentence::preprocess() {
 		dealUnnecessaryTypes();
-		dealCompoundNoun();
+		combineTypes();
 		return false;
 	}
 

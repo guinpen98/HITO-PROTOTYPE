@@ -12,9 +12,10 @@ namespace HITO {
 		int num;
 
 		void dealUnnecessaryTypes();
-		void dealCompoundNoun();
+		void combineTypes();
 		bool isRemove(const std::string& type)const;
 		bool isCombine(const std::string& type)const;
+		bool isCombine(const std::string& type1, const std::string& type2)const;
 	public:
 		Sentence(std::vector<Morpheme> morphemes, int num) : morphemes(morphemes), num(num) {}
 		bool preprocess();

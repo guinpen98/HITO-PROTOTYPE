@@ -125,7 +125,8 @@
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
     <ClCompile Include="human.cpp" />
-    <ClCompile Include="siv_config.cpp" />
+    <ClCompile Include="morpheme.cpp" />
+    <ClCompile Include="analyzer.cpp" />
     <ClCompile Include="siv_main.cpp" />
     <ClCompile Include="oav_to_sen.cpp" />
     <ClCompile Include="part.cpp" />
@@ -338,6 +339,8 @@
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />
     <ClInclude Include="human.h" />
+    <ClInclude Include="morpheme.h" />
+    <ClInclude Include="analyzer.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="oav_to_sen.h" />
     <ClInclude Include="part.h" />

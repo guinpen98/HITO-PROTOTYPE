@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include "dialogue_scene.h"
 #include "sentence.h"
+#include "analyzer.h"
 
 namespace HITO {
 	constexpr int char_size = 256;
@@ -21,9 +22,7 @@ namespace HITO {
 	}
 
 	Sentence DialogueScene::extractMecabResult(const std::string& result) {
-		StringList word_list;
-		StringList category_list1;
-		StringList category_list2;
+		std::vector<Morpheme> sentence;
 		int cnt = 0;
 
 		std::stringstream ss_result(result);
@@ -34,19 +33,17 @@ namespace HITO {
 			std::string word = sjis_line.substr(0, index);
 			std::string category_clump = sjis_line.substr(index + 1);
 			if (word == "EOS") break; // 終端の場合
-			word_list.push_back(word);
 
 			index = (int)category_clump.find(",");
-			std::string category1 = category_clump.substr(0, index);
+			std::string type1 = category_clump.substr(0, index);
 			category_clump = category_clump.substr(index + 1);
 			index = (int)category_clump.find(",");
-			std::string category2 = category_clump.substr(0, index);
+			std::string type2 = category_clump.substr(0, index);
 
-			category_list1.push_back(category1);
-			category_list2.push_back(category2);
+			sentence.push_back(Morpheme{ word, type1, type2 });
 			cnt++;
 		}
-		return Sentence(word_list, category_list1, category_list2, cnt);
+		return Sentence(sentence, cnt);
 	}
 
 	GameScene DialogueScene::update() {
@@ -59,7 +56,13 @@ namespace HITO {
 		MeCab::Tagger* tagger = MeCab::createTagger("");
 		const std::string result = tagger->parse(input.c_str());
 		Sentence sentence = extractMecabResult(result);
-		sentence.preprocess();
+		bool isKeyword = sentence.preprocess();
+		if (isKeyword) {
+			// ルールベースの会話
+			std::string ruled_sen;
+			return ruled_sen;
+		}
+		Analyzer::analyze(sentence);
 
 		return result;
 	}

@@ -1,23 +1,25 @@
 ﻿#ifndef HITO_SENTENCE_H
 #define HITO_SENTENCE_H
 
-namespace HITO {
-	using StringList = std::vector<std::string>;
+#include <vector>
 
+#include "morpheme.h"
+
+namespace HITO {
 	class Sentence {
 	private:
-		StringList word_list;
-		StringList category1;
-		StringList category2;
 		int num;
-
-		void deleteAdverb();
-
+		std::vector<Morpheme> sentence;
+		std::vector<std::string> keywords;
+		void dealUnnecessaryTypes();
+		bool isRemove(const std::string& type)const;
+		bool isCombine(const std::string& type)const;
 	public:
-		Sentence(StringList word_list, StringList category1, StringList category2, int num) : word_list(word_list), category1(category1), category2(category2), num(num) {}
-		void preprocess();
-		int size();
+		Sentence(std::vector<Morpheme> sentence, int num) : sentence(sentence), num(num) {}
+		bool preprocess();
+		int size()const;
+		std::vector<std::string> getKeywords()const;
 	};
 }
 
-#endif //!HITO_SENTENCE_H
+#endif // !HITO_SENTENCE_H

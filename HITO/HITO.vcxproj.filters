@@ -162,9 +162,6 @@
     <ClCompile Include="siv_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="siv_config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -175,6 +172,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sentence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="analyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="morpheme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -849,6 +852,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sentence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="analyzer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="morpheme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

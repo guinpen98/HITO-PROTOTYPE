@@ -23,6 +23,17 @@ namespace HITO {
 		}
 	}
 
+	void Sentence::dealCompoundNoun() {
+		for (int i = 0; i < size() - 1; ++i) {
+			if (morphemes[i].type1 != "名詞") continue;
+			if (morphemes[i + 1].type1 != "名詞") continue;
+			morphemes[i + 1].word = morphemes[i].word + morphemes[i + 1].word; // 結合
+			morphemes.erase(morphemes.begin() + i);
+			--i;
+			--num;
+		}
+	}
+
 	bool Sentence::isRemove(const std::string& type) const {
 		for (int i = 0; i < remove_types.size(); ++i)
 			if (type == remove_types[i]) return true;
@@ -37,6 +48,7 @@ namespace HITO {
 
 	bool Sentence::preprocess() {
 		dealUnnecessaryTypes();
+		dealCompoundNoun();
 		return false;
 	}
 

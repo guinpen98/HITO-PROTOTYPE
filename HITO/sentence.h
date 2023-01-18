@@ -12,6 +12,7 @@ namespace HITO {
 		int num;
 
 		void dealUnnecessaryTypes();
+		void dealCompoundNoun();
 		bool isRemove(const std::string& type)const;
 		bool isCombine(const std::string& type)const;
 	public:

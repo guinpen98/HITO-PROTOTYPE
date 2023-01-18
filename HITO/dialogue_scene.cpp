@@ -62,7 +62,7 @@ namespace HITO {
 			std::string ruled_sen;
 			return ruled_sen;
 		}
-		Analyzer::analyze(sentence);
+		std::vector<std::string> analyzed_result = Analyzer::analyze(sentence);
 
 		return result;
 	}

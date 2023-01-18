@@ -8,17 +8,19 @@
 namespace HITO {
 	class Sentence {
 	private:
+		std::vector<Morpheme> morphemes;
 		int num;
-		std::vector<Morpheme> sentence;
-		std::vector<std::string> keywords;
+
 		void dealUnnecessaryTypes();
 		bool isRemove(const std::string& type)const;
 		bool isCombine(const std::string& type)const;
 	public:
-		Sentence(std::vector<Morpheme> sentence, int num) : sentence(sentence), num(num) {}
+		Sentence(std::vector<Morpheme> morphemes, int num) : morphemes(morphemes), num(num) {}
 		bool preprocess();
 		int size()const;
-		std::vector<std::string> getKeywords()const;
+		bool isThisType(const std::string type)const;
+		std::string getSentence()const;
+		std::pair<Sentence, Sentence> splitSentence(const int n)const;
 	};
 }
 

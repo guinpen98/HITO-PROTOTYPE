@@ -9,14 +9,14 @@ namespace HITO {
 
 	void Sentence::dealUnnecessaryTypes() {
 		for (int i = 0; i < size(); ++i) {
-			if (isRemove(sentence[i].type1)) {
-				sentence.erase(sentence.begin() + i);
+			if (isRemove(morphemes[i].type1)) {
+				morphemes.erase(morphemes.begin() + i);
 				--i;
 				--num;
 			}
-			else if (isCombine(sentence[i].type1)) {
-				sentence[i + 1].word = sentence[i].word + sentence[i + 1].word; // 結合
-				sentence.erase(sentence.begin() + i);
+			else if (isCombine(morphemes[i].type1)) {
+				morphemes[i + 1].word = morphemes[i].word + morphemes[i + 1].word; // 結合
+				morphemes.erase(morphemes.begin() + i);
 				--i;
 				--num;
 			}
@@ -44,7 +44,22 @@ namespace HITO {
 		return num;
 	}
 
-	std::vector<std::string> Sentence::getKeywords()const {
-		return keywords;
+	bool Sentence::isThisType(const std::string type)const {
+		if (num != 1) return false;
+		return morphemes[0].type1 == type || morphemes[0].type2 == type;
+	}
+
+	std::string Sentence::getSentence() const{
+		std::string sentence = "";
+		for (int i = 0; i < num; ++i) {
+			sentence += morphemes[i].word;
+		}
+		return sentence;
+	}
+	std::pair<Sentence, Sentence> Sentence::splitSentence(const int n)const {
+		std::vector<Morpheme> morphemes1(n), morphemes2(size() - n);
+		std::copy(morphemes.begin(), morphemes.begin() + n, morphemes1.begin());
+		std::copy(morphemes.begin() + n, morphemes.end(), morphemes2.begin());
+		return { Sentence{ morphemes1, n }, Sentence{ morphemes2, size() - n } };
 	}
 }

@@ -1,144 +1,125 @@
 ﻿#include "stdafx.h"
+#include "sentence.h"
 #include "analyzer.h"
 
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <cmath>
-#include <Array>
-
 namespace HITO {
+	std::string check(const Sentence& sentence, std::string(*f1)(const Sentence&), std::string(*f2)(const Sentence&), const int n, const std::string name) {
+		auto [sentence1, sentence2] = sentence.splitSentence(n);
+		std::string output1 = f1(sentence1);
+		if (output1.empty()) return output1;
+		std::string output2 = f2(sentence2);
+		if (output2.empty()) return output2;
+		return name + '(' + output1 + ' ' + output2 + ')';
+	}
 
-	//std::string check(const std::vector<std::string>& input, std::string(*f1)(const std::vector<std::string>&, const std::vector<std::vector<std::string>>&), std::string(*f2)(const std::vector<std::string>&, const std::vector<std::vector<std::string>>&), const int n, const std::string name, const std::vector<std::vector<std::string>>& dic) {
-	//	std::vector<std::string> input1(n), input2((int)input.size() - n);
-	//	copy(input.begin(), input.begin() + n, input1.begin());
-	//	copy(input.begin() + n, input.end(), input2.begin());
-	//	std::string output1 = f1(input1, dic);
-	//	if (output1.empty()) return output1;
-	//	std::string output2 = (*f2)(input2, dic);
-	//	if (output2.empty()) return output2;
-	//	return name + '(' + output1 + ' ' + output2 + ')';
-	//
-	//}
-	//std::string isV(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	if (input.size() != 1) return std::string();
-	//	if (binarySearch(input[0], dic[1]) != -1) return "(V " + input[0] + ")";
-	//	return std::string();
-	//}
-	//std::string isVA(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	if (input.size() != 1) return std::string();
-	//	if (binarySearch(input[0], dic[4]) != -1) return "(VA " + input[0] + ")";
-	//	return std::string();
-	//}
-	//std::string isAdv(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	if (input.size() != 1) return std::string();
-	//	if (binarySearch(input[0], dic[5]) != -1) return "(Adv " + input[0] + ")";
-	//	return std::string();
-	//}
-	//std::string isPP(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	if (input.size() != 1) return std::string();
-	//	if (binarySearch(input[0], dic[3]) != -1) return "(PP " + input[0] + ")";
-	//	return std::string();
-	//}
-	//std::string isN(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic);
-	//std::string isAP(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	const int size = (int)input.size();
-	//
-	//	if (size == 0) return std::string();
-	//	if (size == 1) {
-	//		if (binarySearch(input[0], dic[2]) != -1) return "(AP " + input[0] + ")";
-	//		return std::string();
-	//	}
-	//
-	//	std::string output = check(input, isN, isPP, size - 1, "AP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	output = check(input, isN, isV, size - 1, "AP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	output = check(input, isN, isV, size - 1, "AP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	output = check(input, isAdv, isAP, 1, "AP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	output = check(input, isAP, isAP, 1, "AP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	return std::string();
-	//}
-	//std::string isN(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	const int size = (int)input.size();
-	//
-	//	if (size == 0) return std::string();
-	//	if (size == 1) {
-	//		if (binarySearch(input[0], dic[0]) != -1) return "(N " + input[0] + ")";
-	//		return std::string();
-	//	}
-	//	std::string output = check(input, isAP, isN, size - 1, "N", dic);
-	//	if (output.empty()) return std::string();
-	//	else return output;
-	//}
-	//std::string isVP(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	const int size = (int)input.size();
-	//
-	//	if (size < 2) return std::string();
-	//
-	//	std::string output = check(input, isAdv, isVP, 1, "VP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	output = check(input, isN, isVA, size - 1, "VP", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	return std::string();
-	//}
-	//std::string isNP(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	const int size = (int)input.size();
-	//
-	//	if (size < 2) return std::string();
-	//
-	//	std::string output = check(input, isN, isPP, size - 1, "NP", dic);
-	//	if (output.empty()) return std::string();
-	//	else return output;
-	//
-	//}
-	//std::string isS(const std::vector<std::string>& input, const std::vector<std::vector<std::string>>& dic) {
-	//	const int size = (int)input.size();
-	//
-	//	if (size < 2) return std::string();
-	//
-	//	std::string output = check(input, isNP, isV, size - 1, "S", dic);
-	//	if (!output.empty()) return output;
-	//
-	//	for (int i = 2; i <= size - 1; i++) {
-	//		output = check(input, isNP, isAP, i, "S", dic);
-	//		if (!output.empty()) return output;
-	//	}
-	//
-	//	for (int i = 2; i <= size - 2; i++) {
-	//		output = check(input, isNP, isN, i, "S", dic);
-	//		if (!output.empty()) return output;
-	//	}
-	//
-	//	return std::string();
-	//}
-	//std::string parse(const std::string& sen, const std::vector<std::vector<std::string>>& dic) {
-	//	std::istringstream iss(sen);
-	//	std::string s;
-	//	std::vector<std::string> input;
-	//	while (iss >> s) {
-	//		input.push_back(s);
-	//	}
-	//	return isS(input, dic);
-	//}
+	std::string isV(const Sentence& sentence) {
+		if (sentence.size() != 1 && sentence.size() != 2) return std::string();
+		if (sentence.size() == 1)
+			if (sentence.isThisType("動詞")) return "(V " + sentence.getSentence() + ")";
+		if (sentence.size() == 2) {
+			auto [sentence1, sentence2] = sentence.splitSentence(1);
+			if (sentence1.isThisType("動詞") && sentence2.isThisType("助動詞")) return "(V " + sentence.getSentence() + ")";
+		}
+		return std::string();
+	}
 
-	void Analyzer::parse() {
+	std::string isVA(const Sentence& sentence) {
+		if (sentence.size() != 1) return std::string();
+		if (sentence.isThisType("助動詞")) return "(VA " + sentence.getSentence() + ")";
+		return std::string();
+	}
+
+	std::string isPP(const Sentence& sentence) {
+		if (sentence.size() != 1) return std::string();
+		if (sentence.isThisType("助詞")) return "(PP " + sentence.getSentence() + ")";
+		return std::string();
+	}
+
+	std::string isN(const Sentence& sentence);
+
+	std::string isVP(const Sentence& sentence) {
+		if (sentence.size() < 2) return std::string();
+
+		std::string output = check(sentence, isN, isVA, sentence.size() - 1, "VP");
+		if (!output.empty()) return output;
+
+		//output = check(sentence, isV, isVA, sentence.size() - 1, "VP");
+		//if (!output.empty()) return output;
+
+		return std::string();
+	}
+
+	std::string isNP(const Sentence& sentence) {
+		if (sentence.size() < 2) return std::string();
+
+		std::string output = check(sentence, isN, isPP, sentence.size() - 1, "NP");
+		if (!output.empty()) return output;
+		return std::string();
 
 	}
 
-	void Analyzer::analyze(const Sentence& sen) {
-		parse();
+	std::string isAP(const Sentence& sentence) {
+		if (sentence.size() == 0) return std::string();
+		if (sentence.size() == 1) {
+			if (sentence.isThisType("形容詞")) return "(AP " + sentence.getSentence() + ")";
+			return std::string();
+		}
+		std::string output = check(sentence, isN, isPP, sentence.size() - 1, "AP");
+		if (!output.empty()) return output;
+	
+		output = check(sentence, isAP, isAP, 1, "AP");
+		if (!output.empty()) return output;
+
+		
+		for (int i = 2; i <= sentence.size() - 1; i++) {
+			output = check(sentence, isNP, isVP, i, "AP");
+			if (!output.empty()) return output;
+		}
+	
+		return std::string();
+	}
+
+	std::string isN(const Sentence& sentence) {
+		if (sentence.size() == 0) return std::string();
+		if (sentence.size() == 1) {
+			if (sentence.isThisType("名詞")) return "(N " + sentence.getSentence() + ")";
+			return std::string();
+		}
+		std::string output = check(sentence, isAP, isN, sentence.size() - 1, "N");
+		if (output.empty()) return std::string();
+		else return output;
+	}
+
+	std::vector<std::string> isS(const Sentence& sentence) {
+		std::vector<std::string> result;
+		if (sentence.size() < 3) {
+			result.push_back(sentence.getSentence());
+			return result;
+		}
+
+		std::string output = check(sentence, isNP, isV, sentence.size() - 1, "S");
+		if (!output.empty()) result.push_back(output);
+		output = check(sentence, isNP, isV, sentence.size() - 2, "S");
+		if (!output.empty()) result.push_back(output);
+
+		for (int i = 2; i <= sentence.size() - 1; i++) {
+			output = check(sentence, isNP, isAP, i, "S");
+			if (!output.empty()) result.push_back(output);
+		}
+
+		for (int i = 2; i <= sentence.size() - 2; i++) {
+			output = check(sentence, isNP, isVP, i, "S");
+			if (!output.empty()) result.push_back(output);
+		}
+
+		return result;
+	}
+
+	std::vector<std::string> Analyzer::parse(const Sentence& sentence) {
+		return isS(sentence);
+	}
+
+	std::vector<std::string> Analyzer::analyze(const Sentence& sentence) {
+		return parse(sentence);
 	}
 }

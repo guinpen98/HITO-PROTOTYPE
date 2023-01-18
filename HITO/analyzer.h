@@ -4,9 +4,9 @@
 namespace HITO {
 	class Analyzer {
 	private:
-		static void parse();
+		static std::vector<std::string> parse(const class Sentence& sentence);
 	public:
-		static void analyze(const class Sentence& sen);
+		static std::vector<std::string> analyze(const Sentence& sentence);
 	};
 }
 

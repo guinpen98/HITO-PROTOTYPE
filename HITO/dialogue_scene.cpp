@@ -14,10 +14,16 @@ namespace HITO {
 		return tmp.narrow();
 	}
 
-	std::pair<WordList, CategoryListPair> DialogueScene::convertMecabResult(const std::string& result) {
-		WordList word_list;
-		CategoryList category_list1;
-		CategoryList category_list2;
+	std::string sjisToUtf8(const std::string sjis) {
+		String tmp = Unicode::Widen(sjis);
+		return tmp.toUTF8();
+	}
+
+	Word DialogueScene::extractMecabResult(const std::string& result) {
+		StringList word_list;
+		StringList category_list1;
+		StringList category_list2;
+
 		std::stringstream ss_result(result);
 		std::string line;
 		while (std::getline(ss_result, line, '\n')) {
@@ -25,6 +31,7 @@ namespace HITO {
 			int index = (int)sjis_line.find("\t");
 			std::string word = sjis_line.substr(0, index);
 			std::string category_clump = sjis_line.substr(index + 1);
+			if (word == "EOS") break; // 終端の場合
 			word_list.push_back(word);
 
 			index = (int)category_clump.find(",");
@@ -36,7 +43,7 @@ namespace HITO {
 			category_list1.push_back(category1);
 			category_list2.push_back(category2);
 		}
-		return { word_list, {category_list1, category_list2} };
+		return Word(word_list, category_list1, category_list2);
 	}
 
 	GameScene DialogueScene::update() {
@@ -45,10 +52,11 @@ namespace HITO {
 
 	std::string DialogueScene::update(const std::string& input) {
 		if (input == "") return input;
-		// MeCab
+		
 		MeCab::Tagger* tagger = MeCab::createTagger("");
 		const std::string result = tagger->parse(input.c_str());
-		std::pair<WordList, CategoryListPair> converted_result = convertMecabResult(result);
+		Word word = extractMecabResult(result);
+
 		return result;
 	}
 }

@@ -2,15 +2,13 @@
 #define HITO_DIALOGUE_SCENE_H
 
 #include "scene.h"
-
-using CategoryList = std::vector<std::string>;
-using CategoryListPair = std::pair<CategoryList, CategoryList>;
-using WordList = std::vector<std::string>;
+#include "word.h"
 
 namespace HITO {
 	class DialogueScene : public Scene {
 	private:
-		std::pair<WordList, CategoryListPair> convertMecabResult(const std::string& result);
+		Word extractMecabResult(const std::string& result);
+		void combineMorphemes(Word& word);
 
 	public:
 		~DialogueScene() {}

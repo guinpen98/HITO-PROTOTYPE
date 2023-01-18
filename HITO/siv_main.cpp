@@ -19,7 +19,6 @@ void writeFile(const std::string& text) {
 void Main() {
 	std::unique_ptr<HITO::GameMain> game_main(new HITO::GameMain);
 
-	// OAV
 	/*OAVToSEN oav_to_sen("OAV.dat", 1);
 	String gen_sen = Unicode::Widen(oav_to_sen.getSen());*/
 

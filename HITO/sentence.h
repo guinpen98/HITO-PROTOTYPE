@@ -18,10 +18,12 @@ namespace HITO {
 		bool isCombine(const std::string& type1, const std::string& type2)const;
 	public:
 		Sentence(std::vector<Morpheme> morphemes, int num) : morphemes(morphemes), num(num) {}
-		bool preprocess();
+		void preprocess();
 		int size()const;
 		bool isThisType(const std::string type)const;
+		bool isThisType(const std::string type, const int index)const;
 		std::string getSentence()const;
+		std::string getMorphemes(const int index)const;
 		std::pair<Sentence, Sentence> splitSentence(const int n)const;
 	};
 }

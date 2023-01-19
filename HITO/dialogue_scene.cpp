@@ -1,5 +1,6 @@
 ﻿#include <string>
 #include <vector>
+#include <fstream>
 
 #include "mecab.h"
 
@@ -46,6 +47,43 @@ namespace HITO {
 		return Sentence(sentence, cnt);
 	}
 
+	std::string DialogueScene::getKeyword(const Sentence& sentence) const {
+		for (int i = 0; i < sentence.size(); ++i) {
+			if (!sentence.isThisType("感動詞", i)) continue;
+			int index = searchKeyword(sentence.getMorphemes(i));
+			if (index == -1) continue;
+			return interjection_dictionary[index].value;
+		}
+		return std::string();
+	}
+
+	int DialogueScene::searchKeyword(const std::string& target) const {
+		int left = 0, right = (int)interjection_dictionary.size();
+		int center = (int)std::floor((left + right) / 2);
+		while (left + 1 < right) {
+			center = (int)std::floor((left + right) / 2);
+			if (target < interjection_dictionary[center].key) right = center;
+			else left = center;
+		}
+		if (interjection_dictionary[left].key == target) return left;
+		else return -1;
+	}
+
+	DialogueScene::DialogueScene() {
+		std::ifstream ifs("interjections.txt");
+		std::string str;
+		if (ifs.fail()) {
+			std::cerr << "Failed to open file." << std::endl;
+			return ;
+		}
+		while (getline(ifs, str)) {
+			int index = (int)str.find(" ");
+			std::string key = str.substr(0, index);
+			std::string value = str.substr(index + 1);
+			interjection_dictionary.push_back(KeyValue{ key, value });
+		}
+	}
+
 	GameScene DialogueScene::update() {
 		return GameScene::DIALOGUE;
     }
@@ -56,12 +94,13 @@ namespace HITO {
 		MeCab::Tagger* tagger = MeCab::createTagger("");
 		const std::string result = tagger->parse(input.c_str());
 		Sentence sentence = extractMecabResult(result);
-		bool isKeyword = sentence.preprocess();
-		if (isKeyword) {
+		std::string keyword = getKeyword(sentence);
+		if (!keyword.empty()) {
 			// ルールベースの会話
 			std::string ruled_sen;
-			return ruled_sen;
+			return sjisToUtf8(keyword);
 		}
+		sentence.preprocess();
 		std::string analyzed_result = Analyzer::analyze(sentence);
 		if (analyzed_result.empty()) return result;
 		return sjisToUtf8(analyzed_result);

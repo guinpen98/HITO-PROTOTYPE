@@ -67,28 +67,37 @@ namespace HITO {
 		return false;
 	}
 
-	bool Sentence::preprocess() {
+	void Sentence::preprocess() {
 		dealUnnecessaryTypes();
-		return false;
 	}
 
 	int Sentence::size()const {
 		return num;
 	}
 
-	bool Sentence::isThisType(const std::string type)const {
-		if (num != 1) return false;
+	bool Sentence::isThisType(const std::string type) const {
+		if (size() != 1) return false;
 		return morphemes[0].type1 == type || morphemes[0].type2 == type;
+	}
+
+	bool Sentence::isThisType(const std::string type, const int index) const {
+		if (size() <= index) return false;
+		return morphemes[index].type1 == type || morphemes[index].type2 == type;
 	}
 
 	std::string Sentence::getSentence() const{
 		std::string sentence = "";
-		for (int i = 0; i < num; ++i) {
+		for (int i = 0; i < size(); ++i) {
 			sentence += morphemes[i].word;
 		}
 		return sentence;
 	}
-	std::pair<Sentence, Sentence> Sentence::splitSentence(const int n)const {
+
+	std::string Sentence::getMorphemes(const int index) const {
+		return morphemes[index].word;
+	}
+
+	std::pair<Sentence, Sentence> Sentence::splitSentence(const int n) const {
 		std::vector<Morpheme> morphemes1(n), morphemes2(size() - n);
 		std::copy(morphemes.begin(), morphemes.begin() + n, morphemes1.begin());
 		std::copy(morphemes.begin() + n, morphemes.end(), morphemes2.begin());

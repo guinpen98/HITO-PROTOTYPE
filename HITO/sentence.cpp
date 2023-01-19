@@ -11,7 +11,8 @@ namespace HITO {
 
 	const std::array<std::string, 7> remove_types = { "副詞", "接続詞", "感動詞", "記号", "フィラー", "その他", "未知語" };
 	const std::array<std::string, 2> combine_types = { "連体詞", "接頭詞" };
-	const std::array<TypePair, 2> combine_type_pairs = { TypePair{"名詞", "名詞"}, TypePair{"助動詞", "助詞"} };
+	const std::array<TypePair, 0> remove_type_pairs = {  };
+	const std::array<TypePair, 7> combine_type_pairs = { TypePair{ "名詞", "名詞" }, TypePair{ "助動詞", "助詞" }, TypePair{ "助動詞", "助動詞" }, TypePair{ "動詞", "助詞" },TypePair{ "動詞", "動詞" }, TypePair{ "形容詞", "助動詞" }, TypePair{ "形容詞", "助詞" } };
 
 	void Sentence::dealUnnecessaryTypes() {
 		for (int i = 0; i < size(); ++i) {
@@ -27,21 +28,30 @@ namespace HITO {
 				--num;
 			}
 		}
-	}
-
-	void Sentence::combineTypes() {
 		for (int i = 0; i < size() - 1; ++i) {
-			if (!isCombine(morphemes[i].type1, morphemes[i + 1].type1)) continue;
-			morphemes[i].word += morphemes[i + 1].word; // 結合
-			morphemes.erase(morphemes.begin() + i + 1);
-			--i;
-			--num;
+			if (isRemove(morphemes[i].type1, morphemes[i + 1].type1)) {
+				morphemes.erase(morphemes.begin() + i + 1);
+				--i;
+				--num;
+			}
+			else if (isCombine(morphemes[i].type1, morphemes[i + 1].type1)) {
+				morphemes[i].word += morphemes[i + 1].word; // 結合
+				morphemes.erase(morphemes.begin() + i + 1);
+				--i;
+				--num;
+			}
 		}
 	}
 
 	bool Sentence::isRemove(const std::string& type) const {
 		for (int i = 0; i < remove_types.size(); ++i)
 			if (type == remove_types[i]) return true;
+		return false;
+	}
+
+	bool Sentence::isRemove(const std::string& type1, const std::string& type2) const {
+		for (int i = 0; i < remove_type_pairs.size(); ++i)
+			if (type1 == remove_type_pairs[i].forward && type2 == remove_type_pairs[i].backward) return true;
 		return false;
 	}
 
@@ -59,7 +69,6 @@ namespace HITO {
 
 	bool Sentence::preprocess() {
 		dealUnnecessaryTypes();
-		combineTypes();
 		return false;
 	}
 

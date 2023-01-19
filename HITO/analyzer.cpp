@@ -43,8 +43,8 @@ namespace HITO {
 		std::string output = check(sentence, isN, isVA, sentence.size() - 1, "VP");
 		if (!output.empty()) return output;
 
-		output = check(sentence, isV, isVA, sentence.size() - 1, "VP");
-		if (!output.empty()) return output;
+		//output = check(sentence, isV, isVA, sentence.size() - 1, "VP");
+		//if (!output.empty()) return output;
 
 		return std::string();
 	}
@@ -71,8 +71,8 @@ namespace HITO {
 		if (!output.empty()) return output;
 
 		
-		for (int i = 2; i <= sentence.size() - 1; i++) {
-			output = check(sentence, isNP, isVP, i, "AP");
+		for (int i = 2; i <= sentence.size() - 1; ++i) {
+			output = check(sentence, isNP, isV, i, "AP");
 			if (!output.empty()) return output;
 		}
 	
@@ -86,27 +86,51 @@ namespace HITO {
 			return std::string();
 		}
 		std::string output = check(sentence, isAP, isN, sentence.size() - 1, "N");
-		if (output.empty()) return std::string();
-		else return output;
+		if (!output.empty()) return output;
+
+		output = check(sentence, isV, isN, 1, "N");
+		if (!output.empty()) return output;
+
+		return std::string();
 	}
 
 	std::string isS(const Sentence& sentence) {
-		if (sentence.size() < 3) return sentence.getSentence();
+		std::string output;
 
-		std::string output = check(sentence, isNP, isV, sentence.size() - 1, "S");
-		if (!output.empty()) return output;
-		output = check(sentence, isNP, isV, sentence.size() - 2, "S");
-		if (!output.empty()) return output;
-
-		for (int i = 2; i <= sentence.size() - 1; i++) {
+		for (int i = 2; i <= sentence.size() - 1; ++i) {
 			output = check(sentence, isNP, isAP, i, "S");
 			if (!output.empty()) return output;
 		}
 
-		for (int i = 2; i <= sentence.size() - 2; i++) {
+		for (int i = 2; i <= sentence.size() - 1; ++i) {
+			output = check(sentence, isNP, isN, i, "S");
+			if (!output.empty()) return output;
+		}
+
+		for (int i = 2; i <= sentence.size() - 2; ++i) {
 			output = check(sentence, isNP, isVP, i, "S");
 			if (!output.empty()) return output;
 		}
+
+		output = isV(sentence);
+		if (!output.empty()) return output;
+
+		output = isAP(sentence);
+		if (!output.empty()) return output;
+
+		output = isVP(sentence);
+		if (!output.empty()) return output;
+
+		output = isN(sentence);
+		if (!output.empty()) return output;
+
+		if (sentence.size() < 2) return sentence.getSentence();
+		output = check(sentence, isNP, isV, sentence.size() - 1, "S");
+		if (!output.empty()) return output;
+
+		if (sentence.size() < 3) return sentence.getSentence();
+		output = check(sentence, isNP, isV, sentence.size() - 2, "S");
+		if (!output.empty()) return output;
 
 		return std::string();
 	}

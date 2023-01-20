@@ -31,13 +31,14 @@ namespace HITO {
 			if (input != "") {
 				std::string sen = dialogue_scene->generateSentence(input);
 				drawing->setSentence(sen);
+				drawing->setOutputTimer();
 				dialogue_scene->setOutputMode();
 			}
 			drawing->inputModeDraw();
 		}
 		else {
-			dialogue_scene->update();
-			drawing->outputModeDraw();
+			bool is_switch = drawing->outputModeDraw();
+			if (is_switch) dialogue_scene->setInputMode();
 		}
 		if (SimpleGUI::Button(U"ホーム", Vec2{ 850, 500 }, 200))
 			current_scene = GameScene::HOME;

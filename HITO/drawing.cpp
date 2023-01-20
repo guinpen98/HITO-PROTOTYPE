@@ -5,6 +5,9 @@
 #include "drawing.h"
 
 namespace HITO {
+	constexpr int text_display_time = 100; // 100ミリ秒=0.1秒
+	constexpr int display_interval = 10; // 1秒
+
 	void Drawing::characterDraw() const {
 		textures[13]->drawAt(human->dotaiushiro.getX(), human->dotaiushiro.getY());
 		textures[11]->drawAt(human->kubi.getX(), human->kubi.getY());
@@ -56,8 +59,18 @@ namespace HITO {
 		textures[9]->rotatedAt(Vec2{ textures[9]->size().x / 2 + 60, textures[9]->size().y / 2 + 129 }, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(human->migimayu.getX(), human->migimayu.getY());
 	}
 
-	void Drawing::sentenceDraw() const {
-		siv_config->text_font(Unicode::FromUTF8(out_sen)).draw(20, 60);
+	bool Drawing::sentenceDraw(bool isCrawling = false) const {
+		if (isCrawling) {
+			siv_config->text_font(out_sen).draw(20, 60);
+			return true;
+		}
+		auto end = std::chrono::system_clock::now();
+		auto dur = end - start;
+		auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
+		size_t lengh = msec / text_display_time;
+
+		siv_config->text_font(out_sen.substr(0, lengh)).draw(20, 60);
+		return msec > (out_sen.length() + display_interval) * text_display_time;
 	}
 
 	void Drawing::textBoxDraw() const {
@@ -75,10 +88,11 @@ namespace HITO {
 
 		characterDraw();
 		textBoxDraw();
+		sentenceDraw(true);
 	}
-	void Drawing::outputModeDraw() const {
+	bool Drawing::outputModeDraw() const {
 		characterDraw();
-		sentenceDraw();
+		return sentenceDraw();
 	}
 
 	std::string Drawing::input() {
@@ -101,7 +115,11 @@ namespace HITO {
 	}
 
 	void Drawing::setSentence(const std::string& sen) {
-		out_sen = sen;
+		out_sen = Unicode::FromUTF8(sen);
+	}
+
+	void Drawing::setOutputTimer() {
+		start = std::chrono::system_clock::now();
 	}
 
 	bool Drawing::isEnter(const String& siv_str)const {

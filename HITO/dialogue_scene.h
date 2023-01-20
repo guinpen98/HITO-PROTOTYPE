@@ -17,7 +17,6 @@ namespace HITO {
 	class DialogueScene{
 	private:
 		std::vector<KeyValue> interjection_dictionary;
-		std::chrono::system_clock::time_point start;
 		Mode mode = Mode::INPUT;
 
 		class Sentence extractMecabResult(const std::string& result);
@@ -26,8 +25,8 @@ namespace HITO {
 	public:
 		DialogueScene();
 		std::string generateSentence(const std::string& input);
-		void update();
 		void setOutputMode();
+		void setInputMode();
 		Mode getMode()const;
 	};
 }

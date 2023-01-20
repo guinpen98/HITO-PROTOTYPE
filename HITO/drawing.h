@@ -16,11 +16,13 @@ namespace HITO {
 		const std::wstring exe = L"softalk\\SofTalk.exe";
 		std::unique_ptr<SivConfig> siv_config;
 		String text;
-		std::string out_sen;
+		String out_sen;
 		std::unique_ptr<struct Clock> clock;
+		std::chrono::system_clock::time_point start;
+
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
-		void sentenceDraw()const;
+		bool sentenceDraw(bool isCrawling)const;
 		void textBoxDraw()const;
 	public:
 		Drawing() : human(new Human()), siv_config(new SivConfig()), clock(new Clock()) {
@@ -44,7 +46,8 @@ namespace HITO {
 		void clockDrawing();
 		void homeSceneDraw()const;
 		void inputModeDraw()const;
-		void outputModeDraw()const;
+		bool outputModeDraw()const; // inputに切り替わるときにtrue
+		void setOutputTimer();
 		void setSentence(const std::string& sen);
 	};
 }

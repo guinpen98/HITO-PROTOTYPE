@@ -11,7 +11,7 @@
 
 namespace HITO {
 	constexpr int char_size = 256;
-	constexpr int text_display_time = 5000;
+	constexpr int text_display_time = 100;
 
 	std::string utf8ToSjis(const std::string utf8) {
 		String tmp = Unicode::FromUTF8(utf8);
@@ -100,16 +100,15 @@ namespace HITO {
 		if (analyzed_result.empty()) return result;
 		return sjisToUtf8(analyzed_result);
 	}
-	void DialogueScene::update() {
-		auto end = std::chrono::system_clock::now();
-		auto dur = end - start;
-		auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
-		if (msec > text_display_time) mode = Mode::INPUT;
-	}
+
 	void DialogueScene::setOutputMode() {
 		mode = Mode::OUTPUT;
-		start = std::chrono::system_clock::now();
 	}
+
+	void DialogueScene::setInputMode() {
+		mode = Mode::INPUT;
+	}
+
 	Mode DialogueScene::getMode() const {
 		return mode;
 	}

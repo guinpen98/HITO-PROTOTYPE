@@ -11,6 +11,7 @@
 
 namespace HITO {
 	constexpr int char_size = 256;
+	constexpr int text_display_time = 5000;
 
 	std::string utf8ToSjis(const std::string utf8) {
 		String tmp = Unicode::FromUTF8(utf8);
@@ -84,13 +85,7 @@ namespace HITO {
 		}
 	}
 
-	GameScene DialogueScene::update() {
-		return GameScene::DIALOGUE;
-    }
-
-	std::string DialogueScene::update(const std::string& input) {
-		if (input == "") return input;
-		
+	std::string DialogueScene::generateSentence(const std::string& input) {
 		MeCab::Tagger* tagger = MeCab::createTagger("");
 		const std::string result = tagger->parse(input.c_str());
 		Sentence sentence = extractMecabResult(result);
@@ -104,5 +99,18 @@ namespace HITO {
 		std::string analyzed_result = Analyzer::analyze(sentence);
 		if (analyzed_result.empty()) return result;
 		return sjisToUtf8(analyzed_result);
+	}
+	void DialogueScene::update() {
+		auto end = std::chrono::system_clock::now();
+		auto dur = end - start;
+		auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
+		if (msec > text_display_time) mode = Mode::INPUT;
+	}
+	void DialogueScene::setOutputMode() {
+		mode = Mode::OUTPUT;
+		start = std::chrono::system_clock::now();
+	}
+	Mode DialogueScene::getMode() const {
+		return mode;
 	}
 }

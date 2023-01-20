@@ -25,10 +25,20 @@ namespace HITO {
 	}
 
 	void GameMain::dialogueScene() {
-		std::string input = drawing->input();
-		std::string sen = dialogue_scene->update(input);
-		drawing->dialogueSceneDraw(sen);
-
+		Mode current_mode = dialogue_scene->getMode();
+		if (current_mode == Mode::INPUT) {
+			std::string input = drawing->input();
+			if (input != "") {
+				std::string sen = dialogue_scene->generateSentence(input);
+				drawing->setSentence(sen);
+				dialogue_scene->setOutputMode();
+			}
+			drawing->inputModeDraw();
+		}
+		else {
+			dialogue_scene->update();
+			drawing->outputModeDraw();
+		}
 		if (SimpleGUI::Button(U"ホーム", Vec2{ 850, 500 }, 200))
 			current_scene = GameScene::HOME;
 	}

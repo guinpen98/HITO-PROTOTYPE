@@ -20,7 +20,7 @@ namespace HITO {
 		std::unique_ptr<struct Clock> clock;
 		bool isEnter(const String& siv_str)const;
 		void characterDraw()const;
-		void sentenceDraw(const std::string& sen);
+		void sentenceDraw()const;
 		void textBoxDraw()const;
 	public:
 		Drawing() : human(new Human()), siv_config(new SivConfig()), clock(new Clock()) {
@@ -43,7 +43,9 @@ namespace HITO {
 		std::string input();
 		void clockDrawing();
 		void homeSceneDraw()const;
-		void dialogueSceneDraw(const std::string& sen);
+		void inputModeDraw()const;
+		void outputModeDraw()const;
+		void setSentence(const std::string& sen);
 	};
 }
 #endif // !HITO_DRAWING_H

@@ -9,18 +9,26 @@ namespace HITO {
 		const std::string value;
 	};
 
-	class DialogueScene : public Scene {
+	enum class Mode {
+		INPUT
+		, OUTPUT
+	};
+
+	class DialogueScene{
 	private:
 		std::vector<KeyValue> interjection_dictionary;
+		std::chrono::system_clock::time_point start;
+		Mode mode = Mode::INPUT;
 
 		class Sentence extractMecabResult(const std::string& result);
 		std::string getKeyword(const Sentence& sentence)const;
 		int searchKeyword(const std::string& target)const;
 	public:
 		DialogueScene();
-		~DialogueScene() {}
-		GameScene update() override;
-		std::string update(const std::string& input);
+		std::string generateSentence(const std::string& input);
+		void update();
+		void setOutputMode();
+		Mode getMode()const;
 	};
 }
 

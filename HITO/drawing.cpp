@@ -56,8 +56,7 @@ namespace HITO {
 		textures[9]->rotatedAt(Vec2{ textures[9]->size().x / 2 + 60, textures[9]->size().y / 2 + 129 }, Periodic::Sine0_1(10s) * 20_deg - 10_deg).drawAt(human->migimayu.getX(), human->migimayu.getY());
 	}
 
-	void Drawing::sentenceDraw(const std::string& sen) {
-		if (sen != "") out_sen = sen;
+	void Drawing::sentenceDraw() const {
 		siv_config->text_font(Unicode::FromUTF8(out_sen)).draw(20, 60);
 	}
 
@@ -69,18 +68,22 @@ namespace HITO {
 		siv_config->font(text + U'|' + editing_text).draw(area.stretched(-20));
 	}
 
-	void Drawing::dialogueSceneDraw(const std::string& sen) {
+	void Drawing::inputModeDraw() const {
+		//String siv_sen = Unicode::FromUTF8(out_sen);
+		//std::wstring message_cmd = default_cmd + siv_sen.toWstr();
+		//ShellExecute(0, 0, exe.c_str(), message_cmd.c_str(), L"", SW_SHOW); // 音声出力
+
 		characterDraw();
 		textBoxDraw();
-		sentenceDraw(sen);
+	}
+	void Drawing::outputModeDraw() const {
+		characterDraw();
+		sentenceDraw();
 	}
 
 	std::string Drawing::input() {
 		TextInput::UpdateText(text);
 		if (!isEnter(text)) return ""; // 未入力
-		
-		std::wstring message_cmd = default_cmd + text.toWstr();
-		ShellExecute(0, 0, exe.c_str(), message_cmd.c_str(), L"", SW_SHOW); // 音声出力
 
 		std::string s_text = text.toUTF8();
 		text = U""; // 入力を削除
@@ -95,6 +98,10 @@ namespace HITO {
 
 	void Drawing::homeSceneDraw() const {
 		characterDraw();
+	}
+
+	void Drawing::setSentence(const std::string& sen) {
+		out_sen = sen;
 	}
 
 	bool Drawing::isEnter(const String& siv_str)const {

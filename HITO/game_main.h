@@ -10,11 +10,15 @@ namespace HITO {
 		GameScene current_scene = GameScene::HOME;
 		std::unique_ptr<HomeScene> home_scene;
 		std::unique_ptr<class DialogueScene> dialogue_scene;
+
+		void homeScene();
+		void dialogueScene();
+		void inputMode();
+		void outputMode();
+		void switchOutputMode(const std::string& input);
 	public:
 		explicit GameMain();
 		void update();
-		void homeScene();
-		void dialogueScene();
 	};
 }
 

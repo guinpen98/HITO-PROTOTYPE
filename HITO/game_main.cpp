@@ -23,28 +23,40 @@ namespace HITO {
 		home_scene->update();
 		drawing->homeSceneDraw();
 
-		if (SimpleGUI::Button(U"対話", Vec2{ 850, 500 }, 200))
+		if (SimpleGUI::Button(U"対話", Vec2{ 900, 500 }, 200))
 			current_scene = GameScene::DIALOGUE;
 	}
 
 	void GameMain::dialogueScene() {
 		Mode current_mode = dialogue_scene->getMode();
-		if (current_mode == Mode::INPUT) {
-			std::string input = drawing->input();
-			if (input == "") drawing->inputModeDraw();
-			else {
-				std::string sen = dialogue_scene->generateSentence(input);
-				drawing->setSentence(sen);
-				drawing->setOutputTimer();
-				dialogue_scene->setOutputMode();
-				drawing->outputModeDraw();
-			}
+		switch (current_mode)
+		{
+		case HITO::Mode::INPUT:
+			inputMode();
+			break;
+		case HITO::Mode::OUTPUT:
+			outputMode();
+			break;
+		default:
+			break;
 		}
-		else {
-			bool is_switch = drawing->outputModeDraw();
-			if (is_switch) dialogue_scene->setInputMode();
-		}
-		if (SimpleGUI::Button(U"ホーム", Vec2{ 850, 500 }, 200))
+		if (SimpleGUI::Button(U"ホーム", Vec2{ 900, 500 }, 200))
 			current_scene = GameScene::HOME;
+	}
+	void GameMain::inputMode() {
+		std::string input = drawing->input();
+		if (input == "") drawing->inputModeDraw();
+		else switchOutputMode(input);
+	}
+	void GameMain::outputMode() {
+		bool is_switch = drawing->outputModeDraw();
+		if (is_switch) dialogue_scene->setInputMode();
+	}
+	void GameMain::switchOutputMode(const std::string& input) {
+		std::string sen = dialogue_scene->generateSentence(input);
+		drawing->setSentence(sen);
+		drawing->setOutputTimer();
+		dialogue_scene->setOutputMode();
+		drawing->outputModeDraw();
 	}
 }

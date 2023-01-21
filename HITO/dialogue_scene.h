@@ -17,8 +17,7 @@ namespace HITO {
 		std::vector<KeyValue> interjection_dictionary;
 		Mode mode = Mode::INPUT;
 
-		class Sentence extractMecabResult(const std::string& result);
-		std::string getKeyword(const Sentence& sentence)const;
+		std::string getKeyword(const class Sentence& sentence)const;
 		int searchKeyword(const std::string& target)const;
 	public:
 		explicit DialogueScene();

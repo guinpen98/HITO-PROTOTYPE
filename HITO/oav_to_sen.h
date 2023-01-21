@@ -1,8 +1,6 @@
 ﻿#ifndef HITO_OAV_TO_SEN_H
 #define HITO_OAV_TO_SEN_H
-#include <string>
 #include <vector>
-#include <fstream>
 
 class OAVToSEN
 {

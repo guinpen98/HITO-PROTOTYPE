@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "sentence.h"
+﻿#include "sentence.h"
 #include "analyzer.h"
 
 namespace HITO {

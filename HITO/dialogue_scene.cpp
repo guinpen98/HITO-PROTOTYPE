@@ -4,7 +4,6 @@
 
 #include "mecab.h"
 
-#include "stdafx.h"
 #include "dialogue_scene.h"
 #include "sentence.h"
 #include "analyzer.h"

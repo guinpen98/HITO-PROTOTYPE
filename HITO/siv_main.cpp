@@ -1,22 +1,21 @@
-﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.5
-#include <fstream>
-#include <string>
-#include <iostream>
-
-#include "oav_to_sen.h"
-#include "human.h"
-#include "game_main.h"
+﻿#include "game_main.h"
 
 const std::string file_name = "word.txt";
 
-void writeFile(const std::string& text) {
-	std::ofstream writing_file;
-	writing_file.open(file_name, std::ios::app);
-	writing_file << text << std::endl;
-	writing_file.close();
+//void writeFile(const std::string& text) {
+//	std::ofstream writing_file;
+//	writing_file.open(file_name, std::ios::app);
+//	writing_file << text << std::endl;
+//	writing_file.close();
+//}
+
+void init() {
+	Window::Resize(window_w, window_h);
+	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 }
 
 void Main() {
+	init();
 	std::unique_ptr<HITO::GameMain> game_main(new HITO::GameMain);
 
 	/*OAVToSEN oav_to_sen("OAV.dat", 1);

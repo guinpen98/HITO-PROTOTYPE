@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "part.h"
+﻿#include "part.h"
 
 namespace HITO {
 	int Part::getX() const

@@ -1,6 +1,5 @@
 ﻿#ifndef HITO_SENTENCE_H
 #define HITO_SENTENCE_H
-
 #include <vector>
 
 #include "morpheme.h"
@@ -17,7 +16,7 @@ namespace HITO {
 		bool isCombine(const std::string& type)const;
 		bool isCombine(const std::string& type1, const std::string& type2)const;
 	public:
-		Sentence(std::vector<Morpheme> morphemes, int num) : morphemes(morphemes), num(num) {}
+		explicit Sentence(std::vector<Morpheme> morphemes, int num) : morphemes(morphemes), num(num) {}
 		void preprocess();
 		int size()const;
 		bool isThisType(const std::string type)const;

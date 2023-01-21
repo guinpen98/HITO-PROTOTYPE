@@ -1,8 +1,6 @@
 ﻿#ifndef HITO_DIALOGUE_SCENE_H
 #define HITO_DIALOGUE_SCENE_H
 
-#include "scene.h"
-
 namespace HITO {
 	struct KeyValue {
 		const std::string key;
@@ -23,7 +21,7 @@ namespace HITO {
 		std::string getKeyword(const Sentence& sentence)const;
 		int searchKeyword(const std::string& target)const;
 	public:
-		DialogueScene();
+		explicit DialogueScene();
 		std::string generateSentence(const std::string& input);
 		void setOutputMode();
 		void setInputMode();

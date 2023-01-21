@@ -1,4 +1,6 @@
-﻿#include "stdafx.h"
+﻿#include <fstream>
+#include <string>
+
 #include "oav_to_sen.h"
 
 std::string OAVToSEN::getSen() const

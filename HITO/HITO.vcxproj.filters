@@ -168,9 +168,6 @@
     <ClCompile Include="dialogue_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="switching_scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sentence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -824,16 +821,10 @@
     <ClInclude Include="oav_to_sen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cfg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="home_scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="configure.h">
@@ -846,9 +837,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dialogue_scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="switching_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sentence.h">

@@ -1,6 +1,5 @@
 ﻿#include <time.h>
 
-#include "stdafx.h"
 #include "clock.h"
 
 namespace HITO {

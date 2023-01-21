@@ -1,6 +1,5 @@
 ﻿#include <Array>
 
-#include "stdafx.h"
 #include "sentence.h"
 
 namespace HITO {

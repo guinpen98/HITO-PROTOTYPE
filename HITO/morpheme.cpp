@@ -1,2 +1,1 @@
-﻿#include "stdafx.h"
-#include "morpheme.h"
+﻿#include "morpheme.h"

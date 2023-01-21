@@ -1,4 +1,3 @@
-﻿#include "stdafx.h"
-#include "human.h"
+﻿#include "human.h"
 
 

@@ -1,7 +1,10 @@
-﻿#include "stdafx.h"
-#include "game_main.h"
+﻿#include "game_main.h"
 
 namespace HITO {
+	GameMain::GameMain() : drawing(new Drawing), home_scene(new HomeScene), dialogue_scene(new DialogueScene) {
+		// drawing->init();
+	}
+
 	void GameMain::update() {
 		drawing->clockDrawing();
 		switch (current_scene) {
@@ -28,13 +31,14 @@ namespace HITO {
 		Mode current_mode = dialogue_scene->getMode();
 		if (current_mode == Mode::INPUT) {
 			std::string input = drawing->input();
-			if (input != "") {
+			if (input == "") drawing->inputModeDraw();
+			else {
 				std::string sen = dialogue_scene->generateSentence(input);
 				drawing->setSentence(sen);
 				drawing->setOutputTimer();
 				dialogue_scene->setOutputMode();
+				drawing->outputModeDraw();
 			}
-			drawing->inputModeDraw();
 		}
 		else {
 			bool is_switch = drawing->outputModeDraw();

@@ -1,13 +1,10 @@
 ﻿#ifndef HITO_HOME_SCENE_H
 #define HITO_HOME_SCENE_H
 
-#include "scene.h"
-
 namespace HITO {
-	class HomeScene : public Scene {
+	class HomeScene {
 	public:
-		~HomeScene() {}
-		GameScene update() override;
+		void update();
 	};
 }
 

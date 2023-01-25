@@ -4,13 +4,28 @@
 #include "analyzer.h"
 
 namespace HITO {
+	enum class Type {
+		S,
+		NP,
+		VP,
+		N,
+		V,
+		VA,
+		AP,
+		PP,
+	};
+	struct TypeNode {
+		Type type;
+		TypeNode* type_node1;
+		TypeNode* type_node2;
+	};
 	std::string check(const Sentence& sentence, std::string(*f1)(const Sentence&), std::string(*f2)(const Sentence&), const int n, const std::string name) {
 		auto [sentence1, sentence2] = sentence.splitSentence(n);
 		std::string output1 = f1(sentence1);
 		if (output1.empty()) return output1;
 		std::string output2 = f2(sentence2);
 		if (output2.empty()) return output2;
-		return name + '(' + output1 + ' ' + output2 + ')';
+		return '(' + name + ' ' + output1 + ' ' + output2 + ')';
 	}
 
 	std::string isV(const Sentence& sentence) {
@@ -178,5 +193,11 @@ namespace HITO {
 			cnt++;
 		}
 		return Sentence(sentence, cnt);
+	}
+	void Analyzer::semanticAnalysis(std::string& parsing_result) {
+		if (parsing_result[1] == 'N') {
+			parsing_result.pop_back();
+			parsing_result.erase(0, 3);
+		}
 	}
 }

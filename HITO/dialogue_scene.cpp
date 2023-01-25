@@ -51,18 +51,19 @@ namespace HITO {
 	}
 
 	std::string DialogueScene::generateSentence(const std::string& input) {
-		std::string parsed_result = Analyzer::morphologicalAnalysis(input);
-		Sentence sentence = Analyzer::extractMecabResult(parsed_result);
+		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
+		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
 		std::string keyword = getKeyword(sentence);
 		if (!keyword.empty()) {
 			// ルールベースの会話
-			std::string ruled_sen;
+			std::string rule_based_sen;
 			return sjisToUtf8(keyword);
 		}
 		sentence.preprocess();
-		std::string analyzed_result = Analyzer::analyze(sentence);
-		if (analyzed_result.empty()) return parsed_result;
-		return sjisToUtf8(analyzed_result);
+		std::string analysis_result = Analyzer::analyze(sentence);
+		if (analysis_result.empty()) return parsing_result;
+		Analyzer::semanticAnalysis(analysis_result);
+		return sjisToUtf8(analysis_result);
 	}
 
 	void DialogueScene::setOutputMode() {

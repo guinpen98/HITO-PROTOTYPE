@@ -9,6 +9,7 @@ namespace HITO {
 		static std::string analyze(const Sentence& sentence);
 		static std::string morphologicalAnalysis(const std::string& input);
 		static class Sentence extractMecabResult(const std::string& result);
+		static void semanticAnalysis(std::string& parsing_result);
 	};
 }
 

@@ -28,13 +28,13 @@ namespace HITO {
 	}
 
 	void GameMain::dialogueScene() {
-		Mode current_mode = dialogue_scene->getMode();
+		IOMode current_mode = dialogue_scene->getMode();
 		switch (current_mode)
 		{
-		case HITO::Mode::INPUT:
+		case HITO::IOMode::INPUT:
 			inputMode();
 			break;
-		case HITO::Mode::OUTPUT:
+		case HITO::IOMode::OUTPUT:
 			outputMode();
 			break;
 		default:

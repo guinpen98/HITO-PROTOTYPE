@@ -43,6 +43,10 @@ namespace HITO {
 		if (is_affirmation) {
 			return "へ～";
 		}
+		bool is_denial = searchWord(word, denial_dictionary);
+		if (is_denial) {
+			return "あー、そうなんだ";
+		}
 		return std::string();
 	}
 
@@ -78,6 +82,15 @@ namespace HITO {
 		}
 		while (getline(ifs, str)) {
 			affirmation_dictionary.push_back(str);
+		} }
+		{ std::ifstream ifs("denial.txt");
+		std::string str;
+		if (ifs.fail()) {
+			std::cerr << "Failed to open file." << std::endl;
+			return;
+		}
+		while (getline(ifs, str)) {
+			denial_dictionary.push_back(str);
 		} }
 	}
 

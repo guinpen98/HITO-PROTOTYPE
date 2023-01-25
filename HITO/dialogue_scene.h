@@ -21,6 +21,7 @@ namespace HITO {
 	private:
 		std::vector<KeyValue> interjection_dictionary;
 		std::vector<std::string> affirmation_dictionary;
+		std::vector<std::string> denial_dictionary;
 		IOMode io_mode = IOMode::INPUT;
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
 

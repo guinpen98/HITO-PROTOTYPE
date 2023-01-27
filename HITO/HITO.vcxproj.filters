@@ -141,15 +141,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="part.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="human.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="drawing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="oav_to_sen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -162,9 +153,6 @@
     <ClCompile Include="siv_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dialogue_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -175,6 +163,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="morpheme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\drawing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\human.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\part.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -809,15 +809,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="part.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="human.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="drawing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="oav_to_sen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -825,15 +816,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="home_scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="configure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="siv_config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dialogue_scene.h">
@@ -846,6 +828,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="morpheme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\siv_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\drawing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\human.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\part.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\configure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

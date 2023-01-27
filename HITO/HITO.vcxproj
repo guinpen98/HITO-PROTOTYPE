@@ -119,17 +119,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clock.cpp" />
+    <ClCompile Include="..\Library\Drawing\clock.cpp" />
+    <ClCompile Include="..\Library\Drawing\drawing.cpp" />
+    <ClCompile Include="..\Library\Drawing\human.cpp" />
+    <ClCompile Include="..\Library\Drawing\part.cpp" />
     <ClCompile Include="dialogue_scene.cpp" />
-    <ClCompile Include="drawing.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
-    <ClCompile Include="human.cpp" />
     <ClCompile Include="morpheme.cpp" />
     <ClCompile Include="analyzer.cpp" />
     <ClCompile Include="siv_main.cpp" />
     <ClCompile Include="oav_to_sen.cpp" />
-    <ClCompile Include="part.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -330,18 +330,18 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clock.h" />
-    <ClInclude Include="configure.h" />
+    <ClInclude Include="..\Library\Drawing\configure.h" />
+    <ClInclude Include="..\Library\Drawing\human.h" />
+    <ClInclude Include="..\Library\Drawing\part.h" />
     <ClInclude Include="dialogue_scene.h" />
-    <ClInclude Include="drawing.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />
-    <ClInclude Include="human.h" />
+    <ClInclude Include="Library\Drawing\clock.h" />
+    <ClInclude Include="Library\Drawing\drawing.h" />
+    <ClInclude Include="Library\Drawing\siv_config.h" />
     <ClInclude Include="morpheme.h" />
     <ClInclude Include="analyzer.h" />
     <ClInclude Include="oav_to_sen.h" />
-    <ClInclude Include="part.h" />
-    <ClInclude Include="siv_config.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="sentence.h" />
   </ItemGroup>

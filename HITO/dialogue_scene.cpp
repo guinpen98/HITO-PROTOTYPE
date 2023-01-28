@@ -61,40 +61,22 @@ namespace HITO {
 		return dictionary[left] == target;
 	}
 
-	DialogueScene::DialogueScene() {
-		{ std::ifstream ifs("interjections.txt");
-		std::string str;
-		if (ifs.fail()) {
-			std::cerr << "Failed to open file." << std::endl;
-			return;
-		}
-		while (getline(ifs, str)) {
-			int index = (int)str.find(" ");
-			std::string key = str.substr(0, index);
-			std::string value = str.substr(index + 1);
-			interjection_dictionary.push_back(KeyValue{ key, value });
-		} }
-		{ std::ifstream ifs("affirmation.txt");
-		std::string str;
-		if (ifs.fail()) {
-			std::cerr << "Failed to open file." << std::endl;
-			return;
-		}
-		while (getline(ifs, str)) {
-			affirmation_dictionary.push_back(str);
-		} }
-		{ std::ifstream ifs("denial.txt");
-		std::string str;
-		if (ifs.fail()) {
-			std::cerr << "Failed to open file." << std::endl;
-			return;
-		}
-		while (getline(ifs, str)) {
-			denial_dictionary.push_back(str);
-		} }
-	}
+	int init_sentence_num = 0;
+	std::array<std::string, 2> init_sentence = { "お名前は何ですか？", "さんですか、素敵な名前ですね" };
 
 	std::string DialogueScene::generateSentence(const std::string& input) {
+		if (dialogue_mode == DialogueMode::INIT) {
+			if (init_sentence_num == 0) {
+				std::string output_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+				init_sentence_num++;
+				return output_sen;
+			}
+			std::string name = input;
+			name.erase(name.size() - 1);
+			data.name = name;
+			dialogue_mode = DialogueMode::DEFAULT;
+			return data.name + sjisToUtf8(init_sentence[init_sentence_num]);
+		}
 		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) {
 			return sjisToUtf8(closedQuestion(utf8ToSjis(input)));
 		}
@@ -123,5 +105,56 @@ namespace HITO {
 
 	IOMode DialogueScene::getMode() const {
 		return io_mode;
+	}
+	bool DialogueScene::init() {
+		{
+			std::ifstream ifs("interjections.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				int index = (int)str.find(" ");
+				std::string key = str.substr(0, index);
+				std::string value = str.substr(index + 1);
+				interjection_dictionary.push_back(KeyValue{ key, value });
+			}
+		}
+		{
+			std::ifstream ifs("affirmation.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				affirmation_dictionary.push_back(str);
+			}
+		}
+		{
+			std::ifstream ifs("denial.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				denial_dictionary.push_back(str);
+			}
+		}
+		{
+			std::ifstream ifs("data.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				dialogue_mode = DialogueMode::INIT;
+				return true;
+			}
+			while (getline(ifs, str)) {
+				data.name = str;
+			}
+		}
+		return true;
 	}
 }

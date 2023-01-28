@@ -18,6 +18,10 @@ void Main() {
 	init();
 	std::unique_ptr<HITO::GameMain> game_main(new HITO::GameMain);
 
+	bool is_success = game_main->init();
+
+	if (!is_success) return;
+
 	/*OAVToSEN oav_to_sen("OAV.dat", 1);
 	String gen_sen = Unicode::Widen(oav_to_sen.getSen());*/
 

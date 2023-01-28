@@ -2,7 +2,11 @@
 
 namespace HITO {
 	GameMain::GameMain() : drawing(new Drawing), home_scene(new HomeScene), dialogue_scene(new DialogueScene) {
-		// drawing->init();
+		
+	}
+
+	bool GameMain::init() {
+		return dialogue_scene->init();
 	}
 
 	void GameMain::update() {

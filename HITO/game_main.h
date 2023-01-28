@@ -18,6 +18,7 @@ namespace HITO {
 		void switchOutputMode(const std::string& input);
 	public:
 		explicit GameMain();
+		bool init();
 		void update();
 	};
 }

@@ -165,16 +165,19 @@
     <ClCompile Include="morpheme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\Drawing\clock.cpp">
+    <ClCompile Include="..\Library\Drawing\human.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\part.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Drawing\drawing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\Drawing\human.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\part.cpp">
+    <ClCompile Include="..\Library\Drawing\clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -846,6 +849,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Drawing\configure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

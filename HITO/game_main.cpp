@@ -1,4 +1,6 @@
-﻿#include "game_main.h"
+﻿#include<fstream>
+
+#include "game_main.h"
 
 namespace HITO {
 	GameMain::GameMain() : drawing(new Drawing), home_scene(new HomeScene), dialogue_scene(new DialogueScene) {
@@ -11,6 +13,8 @@ namespace HITO {
 
 	void GameMain::update() {
 		drawing->clockDrawing();
+		if (SimpleGUI::Button(U"セーブ", Vec2{ 100, 100 }, 200))
+			saveData();
 		switch (current_scene) {
 		case GameScene::HOME:
 			homeScene();
@@ -62,5 +66,10 @@ namespace HITO {
 		drawing->setOutputTimer();
 		dialogue_scene->setOutputMode();
 		drawing->outputModeDraw();
+	}
+	void GameMain::saveData()const {
+		std::ofstream outputfile("data.txt");
+		outputfile << dialogue_scene->data.name;
+		outputfile.close();
 	}
 }

@@ -26,7 +26,6 @@ namespace HITO {
 		std::vector<std::string> denial_dictionary;
 		IOMode io_mode = IOMode::INPUT;
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
-		Data data;
 
 		std::string getKeyword(const class Sentence& sentence, bool is_ruled_base)const;
 		int searchKeyword(const std::string& target)const;
@@ -38,6 +37,7 @@ namespace HITO {
 		void setOutputMode();
 		void setInputMode();
 		IOMode getMode()const;
+		Data data;
 	};
 }
 

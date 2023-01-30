@@ -19,6 +19,12 @@ namespace HITO {
 		CLOSED_QUESTION
 	};
 
+	enum class AnswerType {
+		YER,
+		NO,
+		OTHER
+	};
+
 	class DialogueScene{
 	private:
 		std::vector<KeyValue> interjection_dictionary;
@@ -29,7 +35,7 @@ namespace HITO {
 
 		std::string getKeyword(const class Sentence& sentence, bool is_ruled_base)const;
 		int searchKeyword(const std::string& target)const;
-		std::string closedQuestion(const std::string& input);
+		AnswerType closedQuestion(const std::string& input);
 		bool searchWord(const std::string& target, const std::vector<std::string> dictionary)const;
 	public:
 		bool init();

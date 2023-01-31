@@ -1,4 +1,6 @@
-﻿#include "mecab.h"
+﻿#include <fstream>
+
+#include "mecab.h"
 
 #include "sentence.h"
 #include "analyzer.h"
@@ -155,6 +157,46 @@ namespace HITO {
 		return isS(sentence);
 	}
 
+	bool Analyzer::init() {
+		{
+			std::ifstream ifs("interjections.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				int index = (int)str.find(" ");
+				std::string key = str.substr(0, index);
+				std::string value = str.substr(index + 1);
+				interjection_dictionary.push_back(KeyValue{ key, value });
+			}
+		}
+		{
+			std::ifstream ifs("affirmation.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				affirmation_dictionary.push_back(str);
+			}
+		}
+		{
+			std::ifstream ifs("denial.txt");
+			std::string str;
+			if (ifs.fail()) {
+				std::cerr << "Failed to open file." << std::endl;
+				return false;
+			}
+			while (getline(ifs, str)) {
+				denial_dictionary.push_back(str);
+			}
+		}
+		return true;
+	}
+
 	std::string Analyzer::analyze(const Sentence& sentence) {
 		return parse(sentence);
 	}
@@ -200,4 +242,53 @@ namespace HITO {
 			parsing_result.erase(0, 3);
 		}
 	}
+
+	std::string Analyzer::getKeyword(const Sentence& sentence, bool is_ruled_base = false) const {
+		for (int i = 0; i < sentence.size(); ++i) {
+			if (!sentence.isThisType("感動詞", i)) continue;
+			int index = searchKeyword(sentence.getMorphemes(i));
+			if (index == -1) continue;
+			if (is_ruled_base) return interjection_dictionary[index].value;
+			return interjection_dictionary[index].key;
+		}
+		return std::string();
+	}
+
+	int Analyzer::searchKeyword(const std::string& target) const {
+		int left = 0, right = (int)interjection_dictionary.size();
+		int center = (int)std::floor((left + right) / 2);
+		while (left + 1 < right) {
+			center = (int)std::floor((left + right) / 2);
+			if (target < interjection_dictionary[center].key) right = center;
+			else left = center;
+		}
+		if (interjection_dictionary[left].key == target) return left;
+		else return -1;
+	}
+
+	AnswerType Analyzer::closedQuestion(const std::string& input) {
+		std::string word = input;
+		word.erase(word.size() - 1);
+		bool is_affirmation = searchWord(word, affirmation_dictionary);
+		if (is_affirmation) {
+			return AnswerType::YER;
+		}
+		bool is_denial = searchWord(word, denial_dictionary);
+		if (is_denial) {
+			return AnswerType::NO;
+		}
+		return AnswerType::OTHER;
+	}
+
+	bool Analyzer::searchWord(const std::string& target, const std::vector<std::string> dictionary) const {
+		int left = 0, right = (int)dictionary.size();
+		int center = (int)std::floor((left + right) / 2);
+		while (left + 1 < right) {
+			center = (int)std::floor((left + right) / 2);
+			if (target < dictionary[center]) right = center;
+			else left = center;
+		}
+		return dictionary[left] == target;
+	}
+
 }

@@ -2,7 +2,6 @@
 
 #include "dialogue_scene.h"
 #include "sentence.h"
-#include "analyzer.h"
 
 namespace HITO {
 	constexpr int char_size = 256;
@@ -13,56 +12,8 @@ namespace HITO {
 		return tmp.toUTF8();
 	}
 
-	std::string DialogueScene::getKeyword(const Sentence& sentence, bool is_ruled_base = false) const {
-		for (int i = 0; i < sentence.size(); ++i) {
-			if (!sentence.isThisType("感動詞", i)) continue;
-			int index = searchKeyword(sentence.getMorphemes(i));
-			if (index == -1) continue;
-			if(is_ruled_base) return interjection_dictionary[index].value;
-			return interjection_dictionary[index].key;
-		}
-		return std::string();
-	}
-
-	int DialogueScene::searchKeyword(const std::string& target) const {
-		int left = 0, right = (int)interjection_dictionary.size();
-		int center = (int)std::floor((left + right) / 2);
-		while (left + 1 < right) {
-			center = (int)std::floor((left + right) / 2);
-			if (target < interjection_dictionary[center].key) right = center;
-			else left = center;
-		}
-		if (interjection_dictionary[left].key == target) return left;
-		else return -1;
-	}
-
-	AnswerType DialogueScene::closedQuestion(const std::string& input) {
-		std::string word = input;
-		word.erase(word.size() - 1);
-		bool is_affirmation = searchWord(word, affirmation_dictionary);
-		if (is_affirmation) {
-			return AnswerType::YER;
-		}
-		bool is_denial = searchWord(word, denial_dictionary);
-		if (is_denial) {
-			return AnswerType::NO;
-		}
-		return AnswerType::OTHER;
-	}
-
 	std::string DialogueScene::getOutputSentence()const {
 		return output_sen;
-	}
-
-	bool DialogueScene::searchWord(const std::string& target, const std::vector<std::string> dictionary) const {
-		int left = 0, right = (int)dictionary.size();
-		int center = (int)std::floor((left + right) / 2);
-		while (left + 1 < right) {
-			center = (int)std::floor((left + right) / 2);
-			if (target < dictionary[center]) right = center;
-			else left = center;
-		}
-		return dictionary[left] == target;
 	}
 
 	int init_sentence_num = 0;
@@ -86,7 +37,7 @@ namespace HITO {
 			}
 
 			if (init_sentence_num == 2) {
-				AnswerType answer_type = closedQuestion(utf8ToSjis(input));
+				AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
 				std::string out_sen;
 				switch (answer_type)
 				{
@@ -111,7 +62,7 @@ namespace HITO {
 			}
 		}
 		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) {
-			AnswerType answer_type = closedQuestion(utf8ToSjis(input));
+			AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
 			std::string out_sen;
 			switch (answer_type)
 			{
@@ -130,7 +81,7 @@ namespace HITO {
 		}
 		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
 		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
-		std::string keyword = getKeyword(sentence, true);
+		std::string keyword = analyzer->getKeyword(sentence, true);
 		if (!keyword.empty()) {
 			// ルールベースの会話
 			std::string rule_based_sen;
@@ -154,44 +105,14 @@ namespace HITO {
 	IOMode DialogueScene::getMode() const {
 		return io_mode;
 	}
+	DialogueScene::DialogueScene() : analyzer(new Analyzer) {
+
+	}
 	bool DialogueScene::init() {
 		{
-			std::ifstream ifs("interjections.txt");
-			std::string str;
-			if (ifs.fail()) {
-				std::cerr << "Failed to open file." << std::endl;
-				return false;
-			}
-			while (getline(ifs, str)) {
-				int index = (int)str.find(" ");
-				std::string key = str.substr(0, index);
-				std::string value = str.substr(index + 1);
-				interjection_dictionary.push_back(KeyValue{ key, value });
-			}
-		}
-		{
-			std::ifstream ifs("affirmation.txt");
-			std::string str;
-			if (ifs.fail()) {
-				std::cerr << "Failed to open file." << std::endl;
-				return false;
-			}
-			while (getline(ifs, str)) {
-				affirmation_dictionary.push_back(str);
-			}
-		}
-		{
-			std::ifstream ifs("denial.txt");
-			std::string str;
-			if (ifs.fail()) {
-				std::cerr << "Failed to open file." << std::endl;
-				return false;
-			}
-			while (getline(ifs, str)) {
-				denial_dictionary.push_back(str);
-			}
-		}
-		{
+			bool is_success = analyzer->init();
+			if (!is_success) return false;
+
 			std::ifstream ifs("data.txt");
 			std::string str;
 			if (ifs.fail()) {

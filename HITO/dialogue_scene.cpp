@@ -50,6 +50,10 @@ namespace HITO {
 		return AnswerType::OTHER;
 	}
 
+	std::string DialogueScene::getOutputSentence()const {
+		return output_sen;
+	}
+
 	bool DialogueScene::searchWord(const std::string& target, const std::vector<std::string> dictionary) const {
 		int left = 0, right = (int)dictionary.size();
 		int center = (int)std::floor((left + right) / 2);
@@ -193,6 +197,8 @@ namespace HITO {
 			if (ifs.fail()) {
 				std::cerr << "Failed to open file." << std::endl;
 				dialogue_mode = DialogueMode::INIT;
+				output_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+				init_sentence_num++;
 				return true;
 			}
 			while (getline(ifs, str)) {

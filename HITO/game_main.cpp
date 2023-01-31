@@ -8,7 +8,13 @@ namespace HITO {
 	}
 
 	bool GameMain::init() {
-		return dialogue_scene->init();
+		bool is_success = dialogue_scene->init();
+		if (dialogue_scene->getOutputSentence() != "") {
+			drawing->setSentence(dialogue_scene->getOutputSentence());
+			drawing->setOutputTimer();
+			dialogue_scene->setOutputMode();
+		}
+		return is_success;
 	}
 
 	void GameMain::update() {
@@ -37,8 +43,7 @@ namespace HITO {
 
 	void GameMain::dialogueScene() {
 		IOMode current_mode = dialogue_scene->getMode();
-		switch (current_mode)
-		{
+		switch (current_mode) {
 		case HITO::IOMode::INPUT:
 			inputMode();
 			break;

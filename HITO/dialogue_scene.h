@@ -30,6 +30,7 @@ namespace HITO {
 		std::vector<KeyValue> interjection_dictionary;
 		std::vector<std::string> affirmation_dictionary;
 		std::vector<std::string> denial_dictionary;
+		std::string output_sen;
 		IOMode io_mode = IOMode::INPUT;
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
 
@@ -42,6 +43,7 @@ namespace HITO {
 		std::string generateSentence(const std::string& input);
 		void setOutputMode();
 		void setInputMode();
+		std::string getOutputSentence()const;
 		IOMode getMode()const;
 		Data data;
 	};

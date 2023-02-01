@@ -124,6 +124,7 @@
     <ClCompile Include="..\Library\Drawing\human.cpp" />
     <ClCompile Include="..\Library\Drawing\part.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="dialogue_manager.cpp" />
     <ClCompile Include="dialogue_scene.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
@@ -335,6 +336,7 @@
     <ClInclude Include="..\Library\Drawing\human.h" />
     <ClInclude Include="..\Library\Drawing\part.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="dialogue_manager.h" />
     <ClInclude Include="dialogue_scene.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />

@@ -66,7 +66,7 @@ namespace HITO {
 		if (is_switch) dialogue_scene->setInputMode();
 	}
 	void GameMain::switchOutputMode(const std::string& input) {
-		std::string sen = dialogue_scene->generateSentence(input);
+		std::string sen = dialogue_scene->update(input);
 		drawing->setSentence(sen);
 		drawing->setOutputTimer();
 		dialogue_scene->setOutputMode();

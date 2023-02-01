@@ -7,11 +7,6 @@ namespace HITO {
 	constexpr int char_size = 256;
 	constexpr int text_display_time = 100;
 
-	std::string sjisToUtf8(const std::string sjis) {
-		String tmp = Unicode::Widen(sjis);
-		return tmp.toUTF8();
-	}
-
 	std::string DialogueScene::getOutputSentence()const {
 		return output_sen;
 	}
@@ -19,7 +14,7 @@ namespace HITO {
 	int init_sentence_num = 0;
 	std::array<std::string, 3> init_sentence = { "お名前は何ですか？", "さんであっていますか？", "さんですか、素敵な名前ですね"};
 
-	std::string DialogueScene::generateSentence(const std::string& input) {
+	std::string DialogueScene::update(const std::string& input) {
 		if (dialogue_mode == DialogueMode::INIT) {
 			if (init_sentence_num == 0) {
 				std::string out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
@@ -37,7 +32,7 @@ namespace HITO {
 			}
 
 			if (init_sentence_num == 2) {
-				AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
+				AnswerType answer_type = dialogue_manager->analyzer->closedQuestion(utf8ToSjis(input));
 				std::string out_sen;
 				switch (answer_type)
 				{
@@ -62,7 +57,7 @@ namespace HITO {
 			}
 		}
 		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) {
-			AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
+			AnswerType answer_type = dialogue_manager->analyzer->closedQuestion(utf8ToSjis(input));
 			std::string out_sen;
 			switch (answer_type)
 			{
@@ -79,19 +74,7 @@ namespace HITO {
 			}
 			return sjisToUtf8(out_sen);
 		}
-		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
-		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
-		std::string keyword = analyzer->getKeyword(sentence, true);
-		if (!keyword.empty()) {
-			// ルールベースの会話
-			std::string rule_based_sen;
-			return sjisToUtf8(keyword);
-		}
-		sentence.preprocess();
-		std::string analysis_result = Analyzer::analyze(sentence);
-		if (analysis_result.empty()) return parsing_result;
-		Analyzer::semanticAnalysis(analysis_result);
-		return sjisToUtf8(analysis_result);
+		return dialogue_manager->generateSentence(input);
 	}
 
 	void DialogueScene::setOutputMode() {
@@ -105,12 +88,14 @@ namespace HITO {
 	IOMode DialogueScene::getMode() const {
 		return io_mode;
 	}
-	DialogueScene::DialogueScene() : analyzer(new Analyzer) {
+
+	DialogueScene::DialogueScene() : dialogue_manager(new DialogueManager) {
 
 	}
+
 	bool DialogueScene::init() {
 		{
-			bool is_success = analyzer->init();
+			bool is_success = dialogue_manager->init();
 			if (!is_success) return false;
 
 			std::ifstream ifs("data.txt");

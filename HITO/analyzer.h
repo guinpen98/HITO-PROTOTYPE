@@ -28,7 +28,7 @@ namespace HITO {
 	public:
 		bool init();
 		std::string getKeyword(const class Sentence& sentence, bool is_ruled_base)const;
-		AnswerType closedQuestion(const std::string& input);
+		AnswerType closedQuestion(const std::string& input)const;
 
 		static std::string analyze(const Sentence& sentence);
 		static std::string morphologicalAnalysis(const std::string& input);

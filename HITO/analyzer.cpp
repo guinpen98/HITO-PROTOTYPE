@@ -266,7 +266,7 @@ namespace HITO {
 		else return -1;
 	}
 
-	AnswerType Analyzer::closedQuestion(const std::string& input) {
+	AnswerType Analyzer::closedQuestion(const std::string& input) const {
 		std::string word = input;
 		word.erase(word.size() - 1);
 		bool is_affirmation = searchWord(word, affirmation_dictionary);

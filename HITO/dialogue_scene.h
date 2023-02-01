@@ -3,6 +3,7 @@
 #include "data.h"
 
 #include "analyzer.h"
+#include "dialogue_manager.h"
 
 namespace HITO {
 	enum class IOMode {
@@ -18,14 +19,14 @@ namespace HITO {
 
 	class DialogueScene{
 	private:
-		std::unique_ptr<Analyzer> analyzer;
+		std::unique_ptr<DialogueManager> dialogue_manager;
 		std::string output_sen;
 		IOMode io_mode = IOMode::INPUT;
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
 	public:
 		explicit DialogueScene();
 		bool init();
-		std::string generateSentence(const std::string& input);
+		std::string update(const std::string& input);
 		void setOutputMode();
 		void setInputMode();
 		std::string getOutputSentence()const;

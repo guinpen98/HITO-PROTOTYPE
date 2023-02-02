@@ -74,7 +74,7 @@ namespace HITO {
 	}
 	void GameMain::saveData()const {
 		std::ofstream outputfile("data.txt");
-		outputfile << dialogue_scene->data.name;
+		outputfile << dialogue_scene->dialogue_manager->data.name;
 		outputfile.close();
 	}
 }

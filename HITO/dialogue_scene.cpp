@@ -11,52 +11,11 @@ namespace HITO {
 		return output_sen;
 	}
 
-	int init_sentence_num = 0;
-	std::array<std::string, 3> init_sentence = { "お名前は何ですか？", "さんであっていますか？", "さんですか、素敵な名前ですね"};
-
 	std::string DialogueScene::update(const std::string& input) {
-		if (dialogue_mode == DialogueMode::INIT) {
-			if (init_sentence_num == 0) {
-				std::string out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
-				init_sentence_num++;
-				return out_sen;
-			}
-
-			if (init_sentence_num == 1) {
-				std::string name = input;
-				name.erase(name.size() - 1);
-				data.name = name;
-				std::string out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
-				init_sentence_num++;
-				return out_sen;
-			}
-
-			if (init_sentence_num == 2) {
-				AnswerType answer_type = dialogue_manager->analyzer->closedQuestion(utf8ToSjis(input));
-				std::string out_sen;
-				switch (answer_type)
-				{
-				case HITO::AnswerType::YER:
-					dialogue_mode = DialogueMode::DEFAULT;
-					out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
-					break;
-				case HITO::AnswerType::NO:
-					init_sentence_num = 0;
-					out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
-					init_sentence_num++;
-					break;
-				case HITO::AnswerType::OTHER:
-					init_sentence_num = 0;
-					out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
-					init_sentence_num++;
-					break;
-				default:
-					break;
-				}
-				return out_sen;
-			}
+		if (dialogue_manager->dialogue_mode == DialogueMode::INIT) {
+			return dialogue_manager->initSentence(input);
 		}
-		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) {
+		if (dialogue_manager->dialogue_mode == DialogueMode::CLOSED_QUESTION) {
 			AnswerType answer_type = dialogue_manager->analyzer->closedQuestion(utf8ToSjis(input));
 			std::string out_sen;
 			switch (answer_type)
@@ -102,13 +61,13 @@ namespace HITO {
 			std::string str;
 			if (ifs.fail()) {
 				std::cerr << "Failed to open file." << std::endl;
-				dialogue_mode = DialogueMode::INIT;
+				dialogue_manager->dialogue_mode = DialogueMode::INIT;
 				output_sen = sjisToUtf8(init_sentence[init_sentence_num]);
 				init_sentence_num++;
 				return true;
 			}
 			while (getline(ifs, str)) {
-				data.name = str;
+				dialogue_manager->data.name = str;
 			}
 		}
 		return true;

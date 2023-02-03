@@ -12,27 +12,6 @@ namespace HITO {
 	}
 
 	std::string DialogueScene::update(const std::string& input) {
-		if (dialogue_manager->dialogue_mode == DialogueMode::INIT) {
-			return dialogue_manager->initSentence(input);
-		}
-		if (dialogue_manager->dialogue_mode == DialogueMode::CLOSED_QUESTION) {
-			AnswerType answer_type = dialogue_manager->analyzer->closedQuestion(utf8ToSjis(input));
-			std::string out_sen;
-			switch (answer_type)
-			{
-			case HITO::AnswerType::YER:
-				out_sen = "へ～";
-				break;
-			case HITO::AnswerType::NO:
-				out_sen = "あー、そうなんだ";
-				break;
-			case HITO::AnswerType::OTHER:
-				break;
-			default:
-				break;
-			}
-			return sjisToUtf8(out_sen);
-		}
 		return dialogue_manager->generateSentence(input);
 	}
 

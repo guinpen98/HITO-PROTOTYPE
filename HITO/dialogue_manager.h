@@ -18,14 +18,16 @@ namespace HITO {
 
 	class DialogueManager {
 	private:
-	public:
 		std::unique_ptr<Analyzer> analyzer;
+
+		std::string initSentence(const std::string& input);
+		std::string closedQuestionSetnence(const std::string& input);
+	public:
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
 		Data data;
 
 		explicit DialogueManager();
 		bool init();
-		std::string initSentence(const std::string& input);
 		std::string generateSentence(const std::string& input);
 	};
 }

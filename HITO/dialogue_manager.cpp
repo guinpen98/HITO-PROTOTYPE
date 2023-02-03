@@ -5,6 +5,25 @@ namespace HITO {
 	int init_sentence_num = 0;
 	std::array<std::string, 3> init_sentence = { "お名前は何ですか？", "さんであっていますか？", "さんですか、素敵な名前ですね" };
 
+	std::string DialogueManager::closedQuestionSetnence(const std::string& input) {
+		AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
+		std::string out_sen;
+		switch (answer_type)
+		{
+		case HITO::AnswerType::YER:
+			out_sen = "へ～";
+			break;
+		case HITO::AnswerType::NO:
+			out_sen = "あー、そうなんだ";
+			break;
+		case HITO::AnswerType::OTHER:
+			break;
+		default:
+			break;
+		}
+		return sjisToUtf8(out_sen);
+	}
+
 	DialogueManager::DialogueManager() :analyzer(new Analyzer) {
 
 	}
@@ -64,6 +83,10 @@ namespace HITO {
 
 
 	std::string DialogueManager::generateSentence(const std::string& input) {
+		if (dialogue_mode == DialogueMode::INIT) return initSentence(input);
+
+		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) return closedQuestionSetnence(input);
+
 		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
 		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
 		std::string keyword = analyzer->getKeyword(sentence, true);

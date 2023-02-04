@@ -2,7 +2,7 @@
 #define HITO_DIALOGUE_H
 
 #include "data.h"
-#include "analyzer.h"
+#include "nlu.h"
 
 namespace HITO {
 	enum class DialogueMode {
@@ -14,21 +14,20 @@ namespace HITO {
 	extern int init_sentence_num;
 	extern std::array<std::string, 3> init_sentence;
 
-	std::string sjisToUtf8(const std::string sjis);
-
 	class DialogueManager {
 	private:
-		std::unique_ptr<Analyzer> analyzer;
+		std::unique_ptr<Nlu> nlu;
+		std::shared_ptr<Analyzer> analyzer;
 
 		std::string initSentence(const std::string& input);
-		std::string closedQuestionSetnence(const std::string& input);
+		//std::string closedQuestionSetnence(const std::string& input);
 	public:
 		DialogueMode dialogue_mode = DialogueMode::DEFAULT;
 		Data data;
 
 		explicit DialogueManager();
 		bool init();
-		std::string generateSentence(const std::string& input);
+		std::string update(const std::string& input);
 	};
 }
 #endif // !HITO_DIALOGUE_H

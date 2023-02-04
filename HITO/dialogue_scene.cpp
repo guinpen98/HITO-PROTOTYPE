@@ -12,7 +12,7 @@ namespace HITO {
 	}
 
 	std::string DialogueScene::update(const std::string& input) {
-		return dialogue_manager->generateSentence(input);
+		return dialogue_manager->update(input);
 	}
 
 	void DialogueScene::setOutputMode() {

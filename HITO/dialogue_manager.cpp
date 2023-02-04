@@ -1,31 +1,30 @@
 ﻿#include "dialogue_manager.h"
-#include "sentence.h"
 
 namespace HITO {
 	int init_sentence_num = 0;
 	std::array<std::string, 3> init_sentence = { "お名前は何ですか？", "さんであっていますか？", "さんですか、素敵な名前ですね" };
 
-	std::string DialogueManager::closedQuestionSetnence(const std::string& input) {
-		AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
-		std::string out_sen;
-		switch (answer_type)
-		{
-		case HITO::AnswerType::YER:
-			out_sen = "へ～";
-			break;
-		case HITO::AnswerType::NO:
-			out_sen = "あー、そうなんだ";
-			break;
-		case HITO::AnswerType::OTHER:
-			break;
-		default:
-			break;
-		}
-		return sjisToUtf8(out_sen);
-	}
+	//std::string DialogueManager::closedQuestionSetnence(const std::string& input) {
+	//	AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
+	//	std::string out_sen;
+	//	switch (answer_type)
+	//	{
+	//	case HITO::AnswerType::YER:
+	//		out_sen = "へ～";
+	//		break;
+	//	case HITO::AnswerType::NO:
+	//		out_sen = "あー、そうなんだ";
+	//		break;
+	//	case HITO::AnswerType::OTHER:
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//	return sjisToUtf8(out_sen);
+	//}
 
-	DialogueManager::DialogueManager() :analyzer(new Analyzer) {
-
+	DialogueManager::DialogueManager() : analyzer(new Analyzer) {
+		nlu.reset(new Nlu(analyzer));
 	}
 
 	bool DialogueManager::init() {
@@ -76,29 +75,21 @@ namespace HITO {
 		return std::string();
 	}
 
-	std::string sjisToUtf8(const std::string sjis) {
-		String tmp = Unicode::Widen(sjis);
-		return tmp.toUTF8();
-	}
-
-
-	std::string DialogueManager::generateSentence(const std::string& input) {
+	std::string DialogueManager::update(const std::string& input) {
+		// 初期設定
 		if (dialogue_mode == DialogueMode::INIT) return initSentence(input);
 
-		if (dialogue_mode == DialogueMode::CLOSED_QUESTION) return closedQuestionSetnence(input);
+		// if (dialogue_mode == DialogueMode::CLOSED_QUESTION) return closedQuestionSetnence(input); // 
 
-		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
-		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
-		std::string keyword = analyzer->getKeyword(sentence, true);
-		if (!keyword.empty()) {
-			// ルールベースの会話
-			std::string rule_based_sen;
-			return sjisToUtf8(keyword);
-		}
-		sentence.preprocess();
-		std::string analysis_result = Analyzer::analyze(sentence);
-		if (analysis_result.empty()) return parsing_result;
-		Analyzer::semanticAnalysis(analysis_result);
-		return sjisToUtf8(analysis_result);
+		// 発話理解
+		std::string output_sentence = nlu->UnderstandingLanguage(input);
+		return output_sentence;
+
+		// 内部状態更新
+
+		// 発話選択
+
+		// 発話生成
+
 	}
 }

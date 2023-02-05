@@ -82,7 +82,7 @@ namespace HITO {
 		// if (dialogue_mode == DialogueMode::CLOSED_QUESTION) return closedQuestionSetnence(input); // 
 
 		// 発話理解
-		std::string output_sentence = nlu->UnderstandingLanguage(input);
+		std::string output_sentence = nlu->understandingLanguage(input);
 		return output_sentence;
 
 		// 内部状態更新

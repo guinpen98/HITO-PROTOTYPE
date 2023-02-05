@@ -11,7 +11,7 @@ namespace HITO {
 		
 	}
 
-	std::string Nlu::UnderstandingLanguage(const std::string& input) {
+	std::string Nlu::understandingLanguage(const std::string& input) {
 		std::string parsing_result = Analyzer::morphologicalAnalysis(input);
 		Sentence sentence = Analyzer::extractMecabResult(parsing_result);
 		std::string keyword = analyzer->getKeyword(sentence, true);

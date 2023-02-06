@@ -136,12 +136,21 @@
     <Filter Include="Resource Files\engine\font\min">
       <UniqueIdentifier>{1b103960-f11a-4515-b4f1-f59333ce00d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\NLP">
+      <UniqueIdentifier>{c838bb97-010a-4af1-8871-9f135599b349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Drawing">
+      <UniqueIdentifier>{53a983d0-280c-4a6a-9a5a-1df104426043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NLP">
+      <UniqueIdentifier>{8a26977a-fc22-492b-aeb3-19e20112be42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawing">
+      <UniqueIdentifier>{b4c56f5c-a5d0-4ca0-8b27-700e50f9db11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="oav_to_sen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game_main.cpp">
@@ -156,35 +165,38 @@
     <ClCompile Include="dialogue_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sentence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="analyzer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="morpheme.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\human.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\part.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="data.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\drawing.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Library\NLP\analyzer.cpp">
+      <Filter>Source Files\NLP</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Drawing\clock.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="dialogue_manager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Library\NLP\data.cpp">
+      <Filter>Source Files\NLP</Filter>
     </ClCompile>
-    <ClCompile Include="nlu.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Library\NLP\dialogue_manager.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\morpheme.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\nlu.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\oav_to_sen.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\sentence.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\drawing.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\human.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Drawing\part.cpp">
+      <Filter>Source Files\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -818,9 +830,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="oav_to_sen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -830,41 +839,44 @@
     <ClInclude Include="dialogue_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sentence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="analyzer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="morpheme.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Drawing\clock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Drawing\siv_config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Drawing\drawing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\Drawing\human.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\Drawing\part.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Library\Drawing\configure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="data.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Library\NLP\analyzer.h">
+      <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="dialogue_manager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Library\NLP\data.h">
+      <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="nlu.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\Library\NLP\dialogue_manager.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\clock.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\drawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\human.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\morpheme.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\oav_to_sen.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\nlu.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\part.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\sentence.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Drawing\siv_config.h">
+      <Filter>Header Files\Drawing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

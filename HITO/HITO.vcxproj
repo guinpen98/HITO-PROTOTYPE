@@ -123,21 +123,21 @@
     <ClCompile Include="..\Library\Drawing\drawing.cpp" />
     <ClCompile Include="..\Library\Drawing\human.cpp" />
     <ClCompile Include="..\Library\Drawing\part.cpp" />
-    <ClCompile Include="data.cpp" />
-    <ClCompile Include="dialogue_manager.cpp" />
+    <ClCompile Include="..\Library\NLP\analyzer.cpp" />
+    <ClCompile Include="..\Library\NLP\data.cpp" />
+    <ClCompile Include="..\Library\NLP\dialogue_manager.cpp" />
+    <ClCompile Include="..\Library\NLP\morpheme.cpp" />
+    <ClCompile Include="..\Library\NLP\nlu.cpp" />
+    <ClCompile Include="..\Library\NLP\oav_to_sen.cpp" />
+    <ClCompile Include="..\Library\NLP\sentence.cpp" />
     <ClCompile Include="dialogue_scene.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
-    <ClCompile Include="morpheme.cpp" />
-    <ClCompile Include="analyzer.cpp" />
-    <ClCompile Include="nlu.cpp" />
     <ClCompile Include="siv_main.cpp" />
-    <ClCompile Include="oav_to_sen.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="sentence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\engine\texture\box-shadow\128.png" />
@@ -336,20 +336,20 @@
     <ClInclude Include="..\Library\Drawing\configure.h" />
     <ClInclude Include="..\Library\Drawing\human.h" />
     <ClInclude Include="..\Library\Drawing\part.h" />
-    <ClInclude Include="data.h" />
-    <ClInclude Include="dialogue_manager.h" />
+    <ClInclude Include="..\Library\NLP\analyzer.h" />
+    <ClInclude Include="..\Library\NLP\data.h" />
+    <ClInclude Include="..\Library\NLP\dialogue_manager.h" />
+    <ClInclude Include="..\Library\NLP\morpheme.h" />
+    <ClInclude Include="..\Library\NLP\nlu.h" />
+    <ClInclude Include="..\Library\NLP\oav_to_sen.h" />
+    <ClInclude Include="..\Library\NLP\sentence.h" />
     <ClInclude Include="dialogue_scene.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />
     <ClInclude Include="Library\Drawing\clock.h" />
     <ClInclude Include="Library\Drawing\drawing.h" />
     <ClInclude Include="Library\Drawing\siv_config.h" />
-    <ClInclude Include="morpheme.h" />
-    <ClInclude Include="analyzer.h" />
-    <ClInclude Include="nlu.h" />
-    <ClInclude Include="oav_to_sen.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="sentence.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App\example\obj\blacksmith.obj">

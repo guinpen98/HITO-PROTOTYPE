@@ -333,9 +333,12 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Library\Drawing\clock.h" />
     <ClInclude Include="..\Library\Drawing\configure.h" />
+    <ClInclude Include="..\Library\Drawing\drawing.h" />
     <ClInclude Include="..\Library\Drawing\human.h" />
     <ClInclude Include="..\Library\Drawing\part.h" />
+    <ClInclude Include="..\Library\Drawing\siv_config.h" />
     <ClInclude Include="..\Library\NLP\analyzer.h" />
     <ClInclude Include="..\Library\NLP\data.h" />
     <ClInclude Include="..\Library\NLP\dialogue_manager.h" />
@@ -346,9 +349,6 @@
     <ClInclude Include="dialogue_scene.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />
-    <ClInclude Include="Library\Drawing\clock.h" />
-    <ClInclude Include="Library\Drawing\drawing.h" />
-    <ClInclude Include="Library\Drawing\siv_config.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

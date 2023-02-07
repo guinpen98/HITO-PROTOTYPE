@@ -6,6 +6,7 @@
 
 namespace HITO {
 	class GameMain {
+	private:
 		std::unique_ptr<Drawing> drawing;
 		GameScene current_scene = GameScene::HOME;
 		std::unique_ptr<HomeScene> home_scene;

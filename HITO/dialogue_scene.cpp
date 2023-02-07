@@ -32,22 +32,20 @@ namespace HITO {
 	}
 
 	bool DialogueScene::init() {
-		{
-			bool is_success = dialogue_manager->init();
-			if (!is_success) return false;
+		bool is_success = dialogue_manager->init();
+		if (!is_success) return false;
 
-			std::ifstream ifs("data.txt");
-			std::string str;
-			if (ifs.fail()) {
-				std::cerr << "Failed to open file." << std::endl;
-				dialogue_manager->dialogue_mode = DialogueMode::INIT;
-				output_sen = sjisToUtf8(init_sentence[init_sentence_num]);
-				init_sentence_num++;
-				return true;
-			}
-			while (getline(ifs, str)) {
-				dialogue_manager->data.name = str;
-			}
+		std::ifstream ifs("data.txt");
+		std::string str;
+		if (ifs.fail()) {
+			std::cerr << "Failed to open file." << std::endl;
+			dialogue_manager->dialogue_mode = DialogueMode::INIT;
+			output_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+			init_sentence_num++;
+			return true;
+		}
+		while (getline(ifs, str)) {
+			dialogue_manager->data.name = str;
 		}
 		return true;
 	}

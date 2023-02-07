@@ -28,7 +28,7 @@ namespace HITO {
 		explicit Drawing();
 		void init()const;
 		std::string input();
-		void clockDrawing();
+		void clockDrawing()const;
 		void homeSceneDraw()const;
 		void inputModeDraw()const;
 		bool outputModeDraw()const; // inputに切り替わるときにtrue

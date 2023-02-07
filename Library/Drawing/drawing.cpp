@@ -120,7 +120,7 @@ namespace HITO {
 		return s_text;
 	}
 
-	void Drawing::clockDrawing() {
+	void Drawing::clockDrawing() const {
 		clock->update();
 		String time = (clock->hour < 10 ? U"0" : U"") + ToString(clock->hour) + U"：" + (clock->min < 10 ? U"0" : U"") + ToString(clock->min);
 		siv_config->font(time).draw(900, 10);

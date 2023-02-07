@@ -851,12 +851,6 @@
     <ClInclude Include="..\Library\NLP\dialogue_manager.h">
       <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="Library\Drawing\clock.h">
-      <Filter>Header Files\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Drawing\drawing.h">
-      <Filter>Header Files\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="..\Library\Drawing\human.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
@@ -875,7 +869,13 @@
     <ClInclude Include="..\Library\NLP\sentence.h">
       <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="Library\Drawing\siv_config.h">
+    <ClInclude Include="..\Library\Drawing\siv_config.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\drawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\clock.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
   </ItemGroup>

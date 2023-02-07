@@ -11,7 +11,7 @@ namespace HITO {
 		std::shared_ptr<Analyzer> analyzer;
 	public:
 		explicit Nlu(std::shared_ptr<Analyzer> analyzer);
-		std::string understandingLanguage(const std::string& input);
+		std::string understandingLanguage(const std::string& input)const;
 	};
 }
 

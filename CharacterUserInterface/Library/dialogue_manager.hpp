@@ -21,7 +21,7 @@ namespace HITO {
 
 		std::string initSentence(const std::string& input) {
 			if (init_sentence_num == 0) {
-				std::string out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+				std::string out_sen = init_sentence[init_sentence_num];
 				init_sentence_num++;
 				return out_sen;
 			}
@@ -30,7 +30,7 @@ namespace HITO {
 				std::string name = input;
 				name.erase(name.size() - 1);
 				data.name = name;
-				std::string out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
+				std::string out_sen = data.name + init_sentence[init_sentence_num];
 				init_sentence_num++;
 				return out_sen;
 			}
@@ -42,16 +42,16 @@ namespace HITO {
 				{
 				case HITO::AnswerType::YER:
 					dialogue_mode = DialogueMode::DEFAULT;
-					out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
+					out_sen = data.name + init_sentence[init_sentence_num];
 					break;
 				case HITO::AnswerType::NO:
 					init_sentence_num = 0;
-					out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+					out_sen = init_sentence[init_sentence_num];
 					init_sentence_num++;
 					break;
 				case HITO::AnswerType::OTHER:
 					init_sentence_num = 0;
-					out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+					out_sen = init_sentence[init_sentence_num];
 					init_sentence_num++;
 					break;
 				default:

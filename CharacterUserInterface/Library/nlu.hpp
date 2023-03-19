@@ -4,8 +4,6 @@
 #include "analyzer.hpp"
 
 namespace HITO {
-	std::string sjisToUtf8(const std::string sjis);
-
 	class Nlu {
 	private:
 		std::shared_ptr<Analyzer> analyzer;
@@ -18,13 +16,13 @@ namespace HITO {
 			if (!keyword.empty()) {
 				// ルールベースの会話
 				std::string rule_based_sen;
-				return sjisToUtf8(keyword);
+				return keyword;
 			}
 			sentence.preprocess();
 			std::string analysis_result = Analyzer::analyze(sentence);
 			if (analysis_result.empty()) return parsing_result;
 			Analyzer::semanticAnalysis(analysis_result);
-			return sjisToUtf8(analysis_result);
+			return analysis_result;
 		}
 	};
 }

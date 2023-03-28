@@ -1,7 +1,7 @@
 ﻿#include <fstream>
 
 #include "dialogue_scene.h"
-#include "../Library/NLP/sentence.h"
+#include <NLP/sentence.h>
 
 namespace HITO {
 	constexpr int char_size = 256;

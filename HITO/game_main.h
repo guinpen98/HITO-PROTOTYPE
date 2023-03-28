@@ -2,7 +2,7 @@
 #define HITO_GAME_MAIN_H
 #include "home_scene.h"
 #include "dialogue_scene.h"
-#include "../Library/Drawing/drawing.h"
+#include <Drawing/drawing.h>
 
 namespace HITO {
 	class GameMain {

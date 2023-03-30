@@ -2,9 +2,10 @@
 #define HITO_ANALYZER_H
 
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
-#include "mecab.h"
+#include <mecab.h>
 
 #include "sentence.hpp"
 

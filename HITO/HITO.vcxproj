@@ -74,7 +74,7 @@
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Library</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Library/Drawing/include;$(SolutionDir)Library/NLP/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -103,7 +103,7 @@
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Library</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Library/Drawing/include;$(SolutionDir)Library/NLP/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -119,17 +119,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Library\Drawing\clock.cpp" />
-    <ClCompile Include="..\Library\Drawing\drawing.cpp" />
-    <ClCompile Include="..\Library\Drawing\human.cpp" />
-    <ClCompile Include="..\Library\Drawing\part.cpp" />
-    <ClCompile Include="..\Library\NLP\analyzer.cpp" />
-    <ClCompile Include="..\Library\NLP\data.cpp" />
-    <ClCompile Include="..\Library\NLP\dialogue_manager.cpp" />
-    <ClCompile Include="..\Library\NLP\morpheme.cpp" />
-    <ClCompile Include="..\Library\NLP\nlu.cpp" />
-    <ClCompile Include="..\Library\NLP\oav_to_sen.cpp" />
-    <ClCompile Include="..\Library\NLP\sentence.cpp" />
+    <ClCompile Include="..\Library\Drawing\src\clock.cpp" />
+    <ClCompile Include="..\Library\Drawing\src\drawing.cpp" />
+    <ClCompile Include="..\Library\Drawing\src\human.cpp" />
+    <ClCompile Include="..\Library\Drawing\src\part.cpp" />
+    <ClCompile Include="..\Library\NLP\src\analyzer.cpp" />
+    <ClCompile Include="..\Library\NLP\src\data.cpp" />
+    <ClCompile Include="..\Library\NLP\src\dialogue_manager.cpp" />
+    <ClCompile Include="..\Library\NLP\src\morpheme.cpp" />
+    <ClCompile Include="..\Library\NLP\src\nlu.cpp" />
+    <ClCompile Include="..\Library\NLP\src\oav_to_sen.cpp" />
+    <ClCompile Include="..\Library\NLP\src\sentence.cpp" />
     <ClCompile Include="dialogue_scene.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="home_scene.cpp" />
@@ -333,19 +333,19 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Library\Drawing\clock.h" />
-    <ClInclude Include="..\Library\Drawing\configure.h" />
-    <ClInclude Include="..\Library\Drawing\drawing.h" />
-    <ClInclude Include="..\Library\Drawing\human.h" />
-    <ClInclude Include="..\Library\Drawing\part.h" />
-    <ClInclude Include="..\Library\Drawing\siv_config.h" />
-    <ClInclude Include="..\Library\NLP\analyzer.h" />
-    <ClInclude Include="..\Library\NLP\data.h" />
-    <ClInclude Include="..\Library\NLP\dialogue_manager.h" />
-    <ClInclude Include="..\Library\NLP\morpheme.h" />
-    <ClInclude Include="..\Library\NLP\nlu.h" />
-    <ClInclude Include="..\Library\NLP\oav_to_sen.h" />
-    <ClInclude Include="..\Library\NLP\sentence.h" />
+    <ClInclude Include="..\Library\Drawing\include\clock.h" />
+    <ClInclude Include="..\Library\Drawing\include\configure.h" />
+    <ClInclude Include="..\Library\Drawing\include\drawing.h" />
+    <ClInclude Include="..\Library\Drawing\include\human.h" />
+    <ClInclude Include="..\Library\Drawing\include\part.h" />
+    <ClInclude Include="..\Library\Drawing\include\siv_config.h" />
+    <ClInclude Include="..\Library\NLP\include\analyzer.h" />
+    <ClInclude Include="..\Library\NLP\include\data.h" />
+    <ClInclude Include="..\Library\NLP\include\dialogue_manager.h" />
+    <ClInclude Include="..\Library\NLP\include\morpheme.h" />
+    <ClInclude Include="..\Library\NLP\include\nlu.h" />
+    <ClInclude Include="..\Library\NLP\include\oav_to_sen.h" />
+    <ClInclude Include="..\Library\NLP\include\sentence.h" />
     <ClInclude Include="dialogue_scene.h" />
     <ClInclude Include="game_main.h" />
     <ClInclude Include="home_scene.h" />

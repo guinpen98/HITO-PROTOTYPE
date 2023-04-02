@@ -1,7 +1,7 @@
 ﻿#ifndef HITO_DIALOGUE_SCENE_H
 #define HITO_DIALOGUE_SCENE_H
 
-#include <NLP/dialogue_manager.h>
+#include <dialogue_manager.h>
 
 namespace HITO {
 	enum class IOMode {

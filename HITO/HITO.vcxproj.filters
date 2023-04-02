@@ -165,38 +165,38 @@
     <ClCompile Include="dialogue_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\NLP\analyzer.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\clock.cpp">
+    <ClCompile Include="..\Library\Drawing\src\clock.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\NLP\data.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\NLP\dialogue_manager.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\NLP\morpheme.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\NLP\nlu.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\NLP\oav_to_sen.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\NLP\sentence.cpp">
-      <Filter>Source Files\NLP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Library\Drawing\drawing.cpp">
+    <ClCompile Include="..\Library\Drawing\src\drawing.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\Drawing\human.cpp">
+    <ClCompile Include="..\Library\Drawing\src\human.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="..\Library\Drawing\part.cpp">
+    <ClCompile Include="..\Library\Drawing\src\part.cpp">
       <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\oav_to_sen.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\sentence.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\analyzer.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\data.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\dialogue_manager.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\morpheme.cpp">
+      <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\NLP\src\nlu.cpp">
+      <Filter>Source Files\NLP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -839,44 +839,44 @@
     <ClInclude Include="dialogue_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\Drawing\configure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\NLP\analyzer.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\NLP\data.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\NLP\dialogue_manager.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\Drawing\human.h">
+    <ClInclude Include="..\Library\Drawing\include\clock.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\NLP\morpheme.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\NLP\oav_to_sen.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\NLP\nlu.h">
-      <Filter>Header Files\NLP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Library\Drawing\part.h">
+    <ClInclude Include="..\Library\Drawing\include\configure.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\NLP\sentence.h">
+    <ClInclude Include="..\Library\Drawing\include\drawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\include\human.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\include\part.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Drawing\include\siv_config.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\include\analyzer.h">
       <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\Drawing\siv_config.h">
-      <Filter>Header Files\Drawing</Filter>
+    <ClInclude Include="..\Library\NLP\include\data.h">
+      <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\Drawing\drawing.h">
-      <Filter>Header Files\Drawing</Filter>
+    <ClInclude Include="..\Library\NLP\include\dialogue_manager.h">
+      <Filter>Header Files\NLP</Filter>
     </ClInclude>
-    <ClInclude Include="..\Library\Drawing\clock.h">
-      <Filter>Header Files\Drawing</Filter>
+    <ClInclude Include="..\Library\NLP\include\morpheme.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\include\nlu.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\include\oav_to_sen.h">
+      <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\NLP\include\sentence.h">
+      <Filter>Header Files\NLP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

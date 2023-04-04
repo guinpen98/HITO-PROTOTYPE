@@ -162,9 +162,6 @@
     <ClCompile Include="siv_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dialogue_scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Library\Drawing\src\clock.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="..\Library\NLP\src\nlu.cpp">
       <Filter>Source Files\NLP</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogue_scene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,9 +836,6 @@
     <ClInclude Include="home_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dialogue_scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Library\Drawing\include\clock.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
@@ -877,6 +874,9 @@
     </ClInclude>
     <ClInclude Include="..\Library\NLP\include\sentence.h">
       <Filter>Header Files\NLP</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogue_scene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

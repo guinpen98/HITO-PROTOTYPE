@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 
-#include <dialogue_scene.hpp>
+#include "dialogue_scene.hpp"
 
 int main(){
     std::unique_ptr<HITO::DialogueScene> dialogue_scene(new HITO::DialogueScene);

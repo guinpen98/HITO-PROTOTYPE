@@ -1,7 +1,9 @@
 ﻿#ifndef HITO_DIALOGUE_SCENE_H
 #define HITO_DIALOGUE_SCENE_H
 
-#include <dialogue_manager.hpp>
+#include <fstream>
+
+#include <dialogue_manager.h>
 
 namespace HITO {
 	constexpr int char_size = 256;

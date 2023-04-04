@@ -1,7 +1,11 @@
-set(EXECUTABLE_OUTPUT_PATH ../../../bin)
-include_directories(../../../include)
-add_library(libhito
-            SHARED
+# ヘッダーファイルの場所を指定
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../include)
+
+set(LIBRARY_OUTPUT_PATH ../../../../bin)
+
+# ソースコードを追加
+add_library(hito
+            STATIC
             analyzer.cpp
             data.cpp
             dialogue_manager.cpp
@@ -9,4 +13,6 @@ add_library(libhito
             nlu.cpp
             sentence.cpp
             )
-target_link_libraries(libhito ${CMAKE_CURRENT_SOURCE_DIR}/../../../lib/libmecab.lib)
+
+# リンクするライブラリを指定
+target_link_libraries(hito mecab)

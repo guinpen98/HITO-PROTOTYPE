@@ -1,6 +1,7 @@
 ﻿#ifndef HITO_DIALOGUE_SCENE_H
 #define HITO_DIALOGUE_SCENE_H
 
+#include <array>
 #include <fstream>
 
 #include <dialogue_manager.h>

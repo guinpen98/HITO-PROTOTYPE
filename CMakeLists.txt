@@ -7,7 +7,7 @@ set(EXECUTABLE_OUTPUT_PATH bin)
 add_subdirectory(Library/NLP/src)
 
 include_directories(Library/NLP/include)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/bin)
+link_directories(lib)
 
 add_executable(CUIHITO CharacterUserInterface/Main.cpp CharacterUserInterface/dialogue_scene.hpp)
-target_link_libraries(CUIHITO mecab hito)
+target_link_libraries(CUIHITO libmecab.lib hito)

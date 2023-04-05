@@ -3,7 +3,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../include)
 
 # link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../lib)
 
-set(LIBRARY_OUTPUT_PATH ../../../../lib)
+set(LIBRARY_OUTPUT_PATH ../../../../bin)
 
 # ソースコードを追加
 add_library(hito
@@ -17,4 +17,4 @@ add_library(hito
             )
 
 # リンクするライブラリを指定
-# target_link_libraries(hito mecab)
+# target_link_libraries(hito libmecab.lib)

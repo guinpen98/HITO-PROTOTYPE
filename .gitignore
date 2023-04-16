@@ -365,7 +365,7 @@ FodyWeavers.xsd
 # HITO
 bin/
 lib/
-include/
+/include/
 OAV.dat
 softalk/
 libmecab.dll

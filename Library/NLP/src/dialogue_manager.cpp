@@ -49,28 +49,48 @@ namespace HITO {
 			std::string name = input;
 			name.erase(name.size() - 1);
 			data.name = name;
+#if _WIN32 || _WIN64
 			std::string out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
+#else
+			std::string out_sen = data.name + init_sentence[init_sentence_num];
+#endif // _WIN32 || _WIN64
 			init_sentence_num++;
 			return out_sen;
 		}
 
 		if (init_sentence_num == 2) {
+#if _WIN32 || _WIN64
 			AnswerType answer_type = analyzer->closedQuestion(utf8ToSjis(input));
+#else
+			AnswerType answer_type = analyzer->closedQuestion(input);
+#endif // _WIN32 || _WIN64
 			std::string out_sen;
 			switch (answer_type)
 			{
 			case HITO::AnswerType::YER:
 				dialogue_mode = DialogueMode::DEFAULT;
+#if _WIN32 || _WIN64
 				out_sen = data.name + sjisToUtf8(init_sentence[init_sentence_num]);
+#else
+				out_sen = data.name + init_sentence[init_sentence_num];
+#endif // _WIN32 || _WIN64
 				break;
 			case HITO::AnswerType::NO:
 				init_sentence_num = 0;
+#if _WIN32 || _WIN64
 				out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+#else
+				out_sen = init_sentence[init_sentence_num];
+#endif // _WIN32 || _WIN64
 				init_sentence_num++;
 				break;
 			case HITO::AnswerType::OTHER:
 				init_sentence_num = 0;
+#if _WIN32 || _WIN64
 				out_sen = sjisToUtf8(init_sentence[init_sentence_num]);
+#else
+				out_sen = init_sentence[init_sentence_num];
+#endif // _WIN32 || _WIN64
 				init_sentence_num++;
 				break;
 			default:

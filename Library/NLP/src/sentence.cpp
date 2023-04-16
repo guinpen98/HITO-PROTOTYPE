@@ -1,4 +1,4 @@
-﻿#include <Array>
+﻿#include <array>
 
 #include "../include/sentence.h"
 

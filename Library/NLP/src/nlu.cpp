@@ -42,12 +42,20 @@ namespace HITO {
 		if (!keyword.empty()) {
 			// ルールベースの会話
 			std::string rule_based_sen;
+#if _WIN32 || _WIN64
 			return sjisToUtf8(keyword);
+#else
+			return keyword;
+#endif // _WIN32 || _WIN64
 		}
 		sentence.preprocess();
 		std::string analysis_result = Analyzer::analyze(sentence);
 		if (analysis_result.empty()) return parsing_result;
 		Analyzer::semanticAnalysis(analysis_result);
+#if _WIN32 || _WIN64
 		return sjisToUtf8(analysis_result);
+#else
+		return analysis_result;
+#endif // _WIN32 || _WIN64
 	}
 }
